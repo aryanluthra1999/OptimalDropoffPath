@@ -104,5 +104,5 @@ def solve_all(input_directory, output_directory, params=[]):
 
 
 if __name__ == "__main__":
-    fname = "inputs/67_50.in"
+    fname = "inputs/7_50.in"
     runSolver(fname)

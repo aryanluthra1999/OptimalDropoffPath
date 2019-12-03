@@ -144,6 +144,7 @@ class SearchAgent():
         self.graph = util170.adjacency_matrix_to_graph(adj_matrix)[0]  ## maybe we want a graph object from network x instead
         mapping = dict(zip(self.graph,locs))
         self.graph = netx.relabel_nodes(self.graph, mapping)
+        self.distanceMemo=dict()
 
 
 
@@ -207,18 +208,25 @@ class SearchAgent():
             if state.homes_reached[i]:
                 continue
             else:
-                locations.append(state.homes_locations)
+                locations.append(state.homes_locations[i])
 
+        print(locations)
 
-        homes_matrix = np.array([[0 for _ in locations] for _ in locations])
-        for i in range(len(locations)):
-            for j in range(i+1, len(locations)):
-                homes_matrix[i, j] = self.distance(locations[i], locations[j])
-        homes_matrix = csr_matrix(homes_matrix)
-        Tcsr = minimum_spanning_tree(homes_matrix).toarray().astype(float)
+        if len(locations)>1:
+            homes_matrix = np.array([[0 for _ in locations] for _ in locations])
+            for i in range(len(locations)):
+                for j in range(i+1, len(locations)):
+                    homes_matrix[i, j] = self.distance(locations[i], locations[j])
+            homes_matrix = csr_matrix(homes_matrix)
+            Tcsr = minimum_spanning_tree(homes_matrix).toarray().astype(float)
+        else:
+            Tcsr = [0]
 
-        result = sum(Tcsr)
-        result += self.distance(state.location, self.start_state) + state.get_dropoff_cost_and_loc(self.graph)
+        print(Tcsr)
+
+        result = np.sum(Tcsr)
+        result += self.distance(state.location, state.start) + state.get_dropoff_cost_and_loc(self.graph)[0]
+        #print(result)
 
         return result
 
@@ -228,7 +236,15 @@ class SearchAgent():
         ## will reduce heuristic time immensely
         ## copy this method into GameState as well and use it for our method: GameState.get_dropoff_cost_and_loc
         ########################### Fill in here ##############
-        return 1
+        if (loc1,loc2) in self.distanceMemo:
+            return self.distanceMemo[(loc1,loc2)]
+        elif (loc2,loc1) in self.distanceMemo:
+            return self.distanceMemo[(loc2,loc1)]
+        else:
+            dist=netx.dijkstra_path_length(self.graph, loc1, loc2, weight='weight')
+            self.distanceMemo[(loc1,loc2)]=dist
+            return dist
+
 
     def astar(self, heuristic=mstHeuristic):
         """Search the node of least total cost first."""
@@ -252,6 +268,7 @@ class SearchAgent():
                 successors = state.getSuccessors(self.graph)
                 for next_state in successors:
                     if next_state[0] not in closed:
+                        #print(heuristic(self,next_state[0]))
                         fringe.push(next_state, next_state[0].cost_so_far + heuristic(self, next_state[0]))
 
         print("Nodes expanded: ", len(closed))
