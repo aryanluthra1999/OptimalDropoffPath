@@ -210,7 +210,7 @@ class SearchAgent():
             else:
                 locations.append(state.homes_locations[i])
 
-        print(locations)
+        #print(locations)
 
         if len(locations)>1:
             homes_matrix = np.array([[0 for _ in locations] for _ in locations])
@@ -222,13 +222,13 @@ class SearchAgent():
         else:
             Tcsr = [0]
 
-        print(Tcsr)
+        #print(Tcsr)
 
         result = np.sum(Tcsr)
         result += self.distance(state.location, state.start) + state.get_dropoff_cost_and_loc(self.graph)[0]
         #print(result)
 
-        return result
+        return 2/3* result
 
 
     def distance(self, loc1, loc2):
