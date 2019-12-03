@@ -200,6 +200,7 @@ class SearchAgent():
     def mstHeuristic(self, state):
         
 
+
     def astar(self, heuristic=naiveHeuristic):
         """Search the node of least total cost first."""
         # path, weights = {}, {}
@@ -229,41 +230,3 @@ class SearchAgent():
         print("cost: ", goal[0].cost_so_far)
 
         return goal[0].path
-
-    def aStarSearch(problem, heuristic=nullHeuristic):
-        """Search the node that has the lowest combined cost and heuristic first."""
-        path, weights = {}, {}
-        closed = set()
-        fringe = util.PriorityQueue()
-        start = problem.getStartState()
-        fringe.push((start, None, 0), heuristic(start, problem))
-        goal = None
-        path[(start, None, 0)] = None
-        weights[(start, None, 0)] = 0
-        while not fringe.isEmpty():
-            curr_state = fringe.pop()
-            state = curr_state[0]
-
-            if problem.isGoalState(state):
-                goal = curr_state
-                break
-
-            if state not in closed:
-                closed.add(state)
-                successors = problem.getSucessors(state)
-                for next_state in successors:
-                    if next_state[0] not in closed:
-                        path[next_state] = curr_state
-                        weights[next_state] = weights[curr_state] + next_state[2]
-                        fringe.push(next_state, weights[next_state] + heuristic(next_state[0], problem))
-
-        #result = []
-        #while goal[1] != None:
-        #    result.append(goal[1])
-        #    goal = path[goal]
-        #result = result[::-1]
-
-
-        print(goal.path)
-
-        return result
