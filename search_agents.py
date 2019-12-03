@@ -7,11 +7,11 @@ def get_neighbours_and_weights(graph, location):
     ## return in the form of
     #################### FILL IN HERE ################
     #print(list(graph.nodes))
-    nearby_neighbors=graph.neighbors(int(location))
+    nearby_neighbors=graph.neighbors(str(location))
     neighbours=[]
     weights = []
     for n in nearby_neighbors:
-        weights+=[graph.edges[(int(location),int(n))]['weight']]
+        weights+=[graph.edges[(str(location),str(n))]['weight']]
         neighbours+=[n]
     return neighbours, weights
 
@@ -71,7 +71,7 @@ class GameState():
             if self.homes_reached[i] == True:
                 costs += [float("inf")]
             else:
-                costs +=[netx.dijkstra_path_length(G, int(self.location), int(home), weight='weight')]
+                costs +=[netx.dijkstra_path_length(G, str(self.location), str(home), weight='weight')]
 
         return (min(costs),np.argmin(np.array(costs)))
 
@@ -114,9 +114,11 @@ class GameState():
 
 class SearchAgent():
 
-    def __init__(self, adj_matrix, homes_arr, soda_loc):
+    def __init__(self, adj_matrix, homes_arr, soda_loc,locs):
         self.start_state = GameState(homes_arr, soda_loc)
         self.graph = util170.adjacency_matrix_to_graph(adj_matrix)[0]  ## maybe we want a graph object from network x instead
+        mapping = dict(zip(self.graph,locs))
+        self.graph = netx.relabel_nodes(self.graph, mapping)
 
     def uniformCostSearch(self):
         """Search the node of least total cost first."""
