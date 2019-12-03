@@ -226,6 +226,8 @@ class SearchAgent():
     def distance(self, loc1, loc2):
         ## new dijkstras method but with memoized distances
         ## will reduce heuristic time immensely
+        ## copy this method into GameState as well and use it for our method: GameState.get_dropoff_cost_and_loc
+        ########################### Fill in here ##############
         return 1
 
     def astar(self, heuristic=mstHeuristic):
