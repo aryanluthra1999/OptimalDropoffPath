@@ -126,7 +126,7 @@ class SearchAgent():
                         weights[next_state] = weights[curr_state] + next_state[2]
                         fringe.push(next_state, weights[next_state])
 
-        print(goal.path)
+        #print(goal.path)
         return goal
 
     def nullHeuristic(state, problem=None):
