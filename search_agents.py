@@ -201,18 +201,26 @@ class SearchAgent():
         return max(0, state.TA_left - 1)
 
     def mstHeuristic(self, state):
-        locations = state.homes_locations.copy()
-        locations.append(state.start)
+        locations = []
+
+        for i in range(len(state.homes_reached)):
+            if state.homes_reached[i]:
+                continue
+            else:
+                locations.append(state.homes_locations)
+
+
         homes_matrix = np.array([[0 for _ in locations] for _ in locations])
         for i in range(len(locations)):
             for j in range(i+1, len(locations)):
                 homes_matrix[i, j] = self.distance(locations[i], locations[j])
         homes_matrix = csr_matrix(homes_matrix)
-        Tcsr = minimum_spanning_tree(homes_matrix)
+        Tcsr = minimum_spanning_tree(homes_matrix).toarray().astype(float)
 
-        pprint(Tcsr.toarray().astype(int))
+        result = sum(Tcsr)
+        result += self.distance(state.location, self.start_state) + state.get_dropoff_cost_and_loc(self.graph)
 
-        return sum(Tcsr)
+        return result
 
 
     def distance(self, loc1, loc2):
@@ -220,7 +228,7 @@ class SearchAgent():
         ## will reduce heuristic time immensely
         return 1
 
-    def astar(self, heuristic=naiveHeuristic):
+    def astar(self, heuristic=mstHeuristic):
         """Search the node of least total cost first."""
         # path, weights = {}, {}
         closed = set()
