@@ -2,6 +2,9 @@ import numpy as np
 import utils
 import networkx as netx
 import student_utils as util170
+from scipy.sparse import csr_matrix
+from scipy.sparse.csgraph import minimum_spanning_tree
+from pprint import pprint
 
 def get_neighbours_and_weights(graph, location):
     ## return in the form of
@@ -47,7 +50,7 @@ class GameState():
         result.cost_so_far = self.cost_so_far
         return result
 
-    def go_home_cost(self,graph):
+    def go_home_cost(self, graph):
         ### run dijkstras here to get home cost
         return 2/3 * netx.dijkstra_path_length(graph, self.location, self.start, weight='weight')
 
@@ -198,8 +201,24 @@ class SearchAgent():
         return max(0, state.TA_left - 1)
 
     def mstHeuristic(self, state):
-        
+        locations = state.homes_locations.copy()
+        locations.append(state.start)
+        homes_matrix = np.array([[0 for _ in locations] for _ in locations])
+        for i in range(len(locations)):
+            for j in range(i+1, len(locations)):
+                homes_matrix[i, j] = self.distance(locations[i], locations[j])
+        homes_matrix = csr_matrix(homes_matrix)
+        Tcsr = minimum_spanning_tree(homes_matrix)
 
+        pprint(Tcsr.toarray().astype(int))
+
+        return sum(Tcsr)
+
+
+    def distance(self, loc1, loc2):
+        ## new dijkstras method but with memoized distances
+        ## will reduce heuristic time immensely
+        return 1
 
     def astar(self, heuristic=naiveHeuristic):
         """Search the node of least total cost first."""
