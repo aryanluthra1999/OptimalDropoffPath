@@ -25,6 +25,16 @@ class GameState():
         #self.path = []
         #self.cost_so_far = 0
 
+    def __eq__(self, o: object) -> bool:
+        if type(o) == type(self):
+            result = self.location == o.location and self.TA_left == o.TA_left and self.homes_locations == o.homes_locations
+
+
+        return super().__eq__(o)
+
+    def __hash__(self) -> int:
+        return super().__hash__()
+
 
     def copy(self):
         result = GameState(self.homes_locations, self.location)
@@ -40,6 +50,7 @@ class GameState():
     def go_home_cost(self,graph):
         ### run dijkstras here to get home cost
         return netx.dijkstra_path_length(graph, self.location, self.start, weight='weight')
+
     def get_legal_actions(self, graph):
 
         if self.TA_left == 0:
@@ -47,7 +58,8 @@ class GameState():
             result = [("go_home", cost)]
             return result
 
-        if self.location in self.homes_locations:
+
+        if self.location in self.homes_locations and self.homes_reached[self.homes_locations.index(self.location)] == False:
             return [("drop", 0)]
 
         dropoff_cost = self.get_dropoff_cost_and_loc(graph)[0]
@@ -106,6 +118,11 @@ class GameState():
         #result = self.TA_left == 0
         result = sum(np.array(self.homes_reached) == False) == 0
         result = result and self.location == str(self.start)  ### FIX IF NESSECARY
+
+        print(self.TA_left)
+        print(self.homes_reached)
+        print(self.location, "\n")
+
         return result
 
 
@@ -116,6 +133,8 @@ class SearchAgent():
         self.graph = util170.adjacency_matrix_to_graph(adj_matrix)[0]  ## maybe we want a graph object from network x instead
         mapping = dict(zip(self.graph,locs))
         self.graph = netx.relabel_nodes(self.graph, mapping)
+
+
 
     def uniformCostSearch(self):
         """Search the node of least total cost first."""
