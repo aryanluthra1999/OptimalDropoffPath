@@ -30,8 +30,8 @@ class GameState():
         result = GameState(self.homes_locations, self.location)
         result.location = self.location
         result.TA_left = self.TA_left
-        result.homes_locations = self.homes_locations
-        result.homes_reached = self.homes_reached
+        result.homes_locations = self.homes_locations.copy()
+        result.homes_reached = self.homes_reached.copy()
         result.start=self.start
         #result.path = self.path
         #result.cost_so_far = self.cost_so_far
@@ -152,7 +152,7 @@ class SearchAgent():
 
         result = []
         while goal[1] != None:
-            result.append(goal[1])
+            result.append(goal)
             goal = path[goal]
         result = result[::-1]
         #print(result)
