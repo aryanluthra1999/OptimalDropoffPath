@@ -6,7 +6,7 @@ import student_utils as util170
 def get_neighbours_and_weights(graph, location):
     ## return in the form of
     #################### FILL IN HERE ################
-    print(list(graph.nodes))
+    #print(list(graph.nodes))
     nearby_neighbors=graph.neighbors(int(location))
     neighbours=[]
     weights = []
@@ -79,7 +79,7 @@ class GameState():
         new_gs = self.copy()
 
         if action == "drop":
-            new_gs.TA_left -= 1
+            new_gs.TA_left = new_gs.TA_left - 1
             new_gs.homes_reached[int(self.get_dropoff_cost_and_loc(G)[1])] = True
         elif action == 'go_home':
             new_gs.location=new_gs.start
@@ -103,9 +103,9 @@ class GameState():
         return result
 
     def isGoalState(self):
-        result = self.TA_left == 0
-        result = result and sum(np.array(self.homes_reached) == False) == 0
-        result = result and self.location.equals(self.start)  ### FIX IF NESSECARY
+        #result = self.TA_left == 0
+        result = sum(np.array(self.homes_reached) == False) == 0
+        result = result and self.location == int(self.start)  ### FIX IF NESSECARY
         print(self.TA_left)
         print(self.homes_reached)
         print(self.location, "\n")
