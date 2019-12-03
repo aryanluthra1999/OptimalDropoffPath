@@ -55,7 +55,7 @@ class GameState():
 
         if self.TA_left == 0:
             cost = self.go_home_cost(graph)
-            result = [("go_home", cost)]
+            result = [("go_home", 2/3*cost)]
             return result
 
 
