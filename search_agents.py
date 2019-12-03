@@ -169,10 +169,7 @@ class SearchAgent():
                 successors = state.getSuccessors(self.graph)
                 for next_state in successors:
                     if next_state[0] not in closed:
-                        path[next_state] = curr_state
-                        #print(next_state)
-                        weights[next_state] = weights[curr_state] + next_state[2]
-                        fringe.push(next_state, weights[next_state])
+                        fringe.push(next_state, next_state[0].cost_so_far)
 
         # result = []
         # while goal[1] != None:
