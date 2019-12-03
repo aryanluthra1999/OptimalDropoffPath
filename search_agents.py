@@ -6,11 +6,12 @@ import student_utils as util170
 def get_neighbours_and_weights(graph, location):
     ## return in the form of
     #################### FILL IN HERE ################
-    nearby_neighbors=graph.neigbors(location)
+    print(list(graph.nodes))
+    nearby_neighbors=graph.neighbors(int(location))
     neighbours=[]
     weights = []
     for n in nearby_neighbors:
-        weights+=[G.edges[(location,n)]['weight']]
+        weights+=[graph.edges[(int(location),int(n))]['weight']]
         neighbours+=[n]
     return neighbours, weights
 
@@ -26,18 +27,19 @@ class GameState():
 
 
     def copy(self):
-        result = GameState(self.homes_locations, self.location):
+        result = GameState(self.homes_locations, self.location)
         result.location = self.location
         result.TA_left = self.TA_left
         result.homes_locations = self.homes_locations
         result.homes_reached = self.homes_reached
+        result.start=self.start
         #result.path = self.path
         #result.cost_so_far = self.cost_so_far
         return result
 
     def go_home_cost(self,graph):
         ### run dijkstras here to get home cost
-        return netx.dijkstra_path_length(G, self.location, self.home, weight='weight')
+        return netx.dijkstra_path_length(graph, self.location, self.start, weight='weight')
     def get_legal_actions(self, graph):
 
         if self.TA_left == 0:
@@ -48,7 +50,7 @@ class GameState():
         if self.location in self.homes_locations:
             return [("drop", 0)]
 
-        dropoff_cost = self.get_dropoff_cost_and_loc()[0]
+        dropoff_cost = self.get_dropoff_cost_and_loc(graph)[0]
         result = [("drop", dropoff_cost)]
 
         neighbours, weights = get_neighbours_and_weights(graph, self.location)
@@ -59,21 +61,28 @@ class GameState():
 
         return result
 
-    def get_dropoff_cost_and_loc(self):
+    def get_dropoff_cost_and_loc(self,G):
         ## returned tuple is of the form:
         ## (cost to nearest home, index of nearest home in self.homes_locations)
         ################ FILL IN HERE #################
         costs=[]
-        for home in self.homes_locations:
-            costs+=[netx.dijkstra_path_length(G, self.location, self.home, weight='weight')]
-        return (min(costs),self.homes_locations[costs.index(min(costs))])
+        for i in range(len(self.homes_locations)):
+            home = self.homes_locations[i]
+            if self.homes_reached[i] == True:
+                costs += [float("inf")]
+            else:
+                costs +=[netx.dijkstra_path_length(G, int(self.location), int(home), weight='weight')]
 
-    def successor(self, action, cost):
+        return (min(costs),np.argmin(np.array(costs)))
+
+    def successor(self, action, cost,G):
         new_gs = self.copy()
 
         if action == "drop":
             new_gs.TA_left -= 1
-            new_gs.homes_reached[self.get_dropoff_cost_and_loc()[1]] = True
+            new_gs.homes_reached[int(self.get_dropoff_cost_and_loc(G)[1])] = True
+        elif action == 'go_home':
+            new_gs.location=new_gs.start
         else:
             ############# FILL IN HERE ############
             new_gs.location=action
@@ -83,12 +92,12 @@ class GameState():
 
         return new_gs, action, cost
 
-    def getSucessors(self, graph):
+    def getSuccessors(self, graph):
         actions = self.get_legal_actions(graph)
         result = []
 
         for a in actions:
-            r = self.successor(a[0], a[1]), a[1]
+            r = self.successor(a[0], a[1],graph)
             result.append(r)
 
         return result
@@ -96,8 +105,10 @@ class GameState():
     def isGoalState(self):
         result = self.TA_left == 0
         result = result and sum(np.array(self.homes_reached) == False) == 0
-        result = result and self.location == self.start  ### FIX IF NESSECARY
-
+        result = result and self.location.equals(self.start)  ### FIX IF NESSECARY
+        print(self.TA_left)
+        print(self.homes_reached)
+        print(self.location, "\n")
         return result
 
 
@@ -105,7 +116,7 @@ class SearchAgent():
 
     def __init__(self, adj_matrix, homes_arr, soda_loc):
         self.start_state = GameState(homes_arr, soda_loc)
-        self.graph = util170.adjacency_matrix_to_graph(adj_matrix)  ## maybe we want a graph object from network x instead
+        self.graph = util170.adjacency_matrix_to_graph(adj_matrix)[0]  ## maybe we want a graph object from network x instead
 
     def uniformCostSearch(self):
         """Search the node of least total cost first."""
@@ -133,6 +144,7 @@ class SearchAgent():
                 for next_state in successors:
                     if next_state[0] not in closed:
                         path[next_state] = curr_state
+                        #print(next_state)
                         weights[next_state] = weights[curr_state] + next_state[2]
                         fringe.push(next_state, weights[next_state])
 
@@ -141,7 +153,7 @@ class SearchAgent():
             result.append(goal[1])
             goal = path[goal]
         result = result[::-1]
-        print(result)
+        #print(result)
         return result
 
     def nullHeuristic(state, problem=None):
@@ -183,5 +195,5 @@ class SearchAgent():
             result.append(goal[1])
             goal = path[goal]
         result = result[::-1]
-        print(result)
+        #print(result)
         return result
