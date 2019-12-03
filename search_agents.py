@@ -105,10 +105,7 @@ class GameState():
     def isGoalState(self):
         #result = self.TA_left == 0
         result = sum(np.array(self.homes_reached) == False) == 0
-        result = result and self.location == int(self.start)  ### FIX IF NESSECARY
-        print(self.TA_left)
-        print(self.homes_reached)
-        print(self.location, "\n")
+        result = result and self.location == str(self.start)  ### FIX IF NESSECARY
         return result
 
 
