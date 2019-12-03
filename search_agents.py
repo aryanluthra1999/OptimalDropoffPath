@@ -73,7 +73,9 @@ class GameState():
 
         #new_gs.cost_so_far += cost
         #new_gs.path.append(action)
-        return new_gs
+
+        return new_gs, action, cost
+
 
     def getSucessors(self, graph):
         actions = self.get_legal_actions(graph)
