@@ -22,18 +22,18 @@ class GameState():
         self.homes_locations = homes_locations
         self.homes_reached = [False for _ in homes_locations]
         self.start = location
-        #self.path = []
-        #self.cost_so_far = 0
+        self.path = []
+        self.cost_so_far = 0
 
     def __eq__(self, o: object) -> bool:
         if type(o) == type(self):
-            result = self.location == o.location and self.TA_left == o.TA_left and self.homes_locations == o.homes_locations
-
+            return self.__hash__() == o.__hash__()
 
         return super().__eq__(o)
 
     def __hash__(self) -> int:
-        return super().__hash__()
+        data = (tuple(self.location), self.TA_left, tuple(self.homes_reached))
+        return hash(data)
 
 
     def copy(self):
@@ -43,19 +43,27 @@ class GameState():
         result.homes_locations = self.homes_locations.copy()
         result.homes_reached = self.homes_reached.copy()
         result.start=self.start
-        #result.path = self.path
-        #result.cost_so_far = self.cost_so_far
+        result.path = self.path.copy()
+        result.cost_so_far = self.cost_so_far
         return result
 
     def go_home_cost(self,graph):
         ### run dijkstras here to get home cost
-        return netx.dijkstra_path_length(graph, self.location, self.start, weight='weight')
+        return 2/3 * netx.dijkstra_path_length(graph, self.location, self.start, weight='weight')
 
     def get_legal_actions(self, graph):
 
         if self.TA_left == 0:
             cost = self.go_home_cost(graph)
-            result = [("go_home", 2/3*cost)]
+            result = [("go_home", cost)]
+
+            print(self.path, self.cost_so_far, cost)
+
+            print(self.TA_left)
+            print(self.homes_reached)
+            print(self.location, "\n")
+
+
             return result
 
 
@@ -87,20 +95,20 @@ class GameState():
 
         return (min(costs),np.argmin(np.array(costs)))
 
-    def successor(self, action, cost,G):
+    def successor(self, action, cost, G):
         new_gs = self.copy()
 
         if action == "drop":
             new_gs.TA_left = new_gs.TA_left - 1
             new_gs.homes_reached[int(self.get_dropoff_cost_and_loc(G)[1])] = True
         elif action == 'go_home':
-            new_gs.location=new_gs.start
+            new_gs.location = self.start
         else:
             ############# FILL IN HERE ############
-            new_gs.location=action
+            new_gs.location = action
 
-        #new_gs.cost_so_far += cost
-        #new_gs.path.append(action)
+        new_gs.cost_so_far += cost
+        new_gs.path.append(action)
 
         return new_gs, action, cost
 
@@ -119,9 +127,9 @@ class GameState():
         result = sum(np.array(self.homes_reached) == False) == 0
         result = result and self.location == str(self.start)  ### FIX IF NESSECARY
 
-        print(self.TA_left)
-        print(self.homes_reached)
-        print(self.location, "\n")
+        # print(self.TA_left)
+        # print(self.homes_reached)
+        # print(self.location, "\n")
 
         return result
 
@@ -166,13 +174,19 @@ class SearchAgent():
                         weights[next_state] = weights[curr_state] + next_state[2]
                         fringe.push(next_state, weights[next_state])
 
-        result = []
-        while goal[1] != None:
-            result.append(goal)
-            goal = path[goal]
-        result = result[::-1]
-        #print(result)
-        return result
+        # result = []
+        # while goal[1] != None:
+        #     result.append(goal)
+        #     goal = path[goal]
+        # result = result[::-1]
+        # #print(result)
+        #
+        #
+        # print("\n SUM: ", sum([r[2] for r in result]))
+
+        print(goal[0].path, goal[0].cost_so_far)
+
+        return goal
 
     def nullHeuristic(state, problem=None):
         """
@@ -208,10 +222,12 @@ class SearchAgent():
                         weights[next_state] = weights[curr_state] + next_state[2]
                         fringe.push(next_state, weights[next_state] + heuristic(next_state[0], problem))
 
-        result = []
-        while goal[1] != None:
-            result.append(goal[1])
-            goal = path[goal]
-        result = result[::-1]
-        #print(result)
+        #result = []
+        #while goal[1] != None:
+        #    result.append(goal[1])
+        #    goal = path[goal]
+        #result = result[::-1]
+
+        print(goal.path)
+
         return result
