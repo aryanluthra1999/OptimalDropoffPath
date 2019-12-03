@@ -57,11 +57,11 @@ class GameState():
             cost = self.go_home_cost(graph)
             result = [("go_home", cost)]
 
-            print(self.path, self.cost_so_far, cost)
-
-            print(self.TA_left)
-            print(self.homes_reached)
-            print(self.location, "\n")
+            # print(self.path, self.cost_so_far, cost)
+            #
+            # print(self.TA_left)
+            # print(self.homes_reached)
+            # print(self.location, "\n")
 
 
             return result
@@ -127,9 +127,9 @@ class GameState():
         result = sum(np.array(self.homes_reached) == False) == 0
         result = result and self.location == str(self.start)  ### FIX IF NESSECARY
 
-        # print(self.TA_left)
-        # print(self.homes_reached)
-        # print(self.location, "\n")
+        print(self.TA_left)
+        print(self.homes_reached)
+        print(self.location, "\n")
 
         return result
 
