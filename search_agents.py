@@ -1,7 +1,7 @@
 import numpy as np
 import utils
-import scipy as sp
 import networkx as netx
+import student_utils as util170
 
 def get_neighbours_and_weights(graph, location):
     ## return in the form of
@@ -105,7 +105,7 @@ class SearchAgent():
 
     def __init__(self, adj_matrix, homes_arr, soda_loc):
         self.start_state = GameState(homes_arr, soda_loc)
-        self.graph = numx.from_numpy_matrix(adj_matrix)  ## maybe we want a graph object from network x instead
+        self.graph = util170.adjacency_matrix_to_graph(adj_matrix)  ## maybe we want a graph object from network x instead
 
     def uniformCostSearch(self, problem):
         """Search the node of least total cost first."""
