@@ -146,15 +146,15 @@ class SearchAgent():
 
     def uniformCostSearch(self):
         """Search the node of least total cost first."""
-        path, weights = {}, {}
+        # path, weights = {}, {}
         closed = set()
         fringe = utils.PriorityQueue()
         start = self.start_state
         fringe.push((start, None, 0), 0)
         goal = None
 
-        path[(start, None, 0)] = None
-        weights[(start, None, 0)] = 0
+        # path[(start, None, 0)] = None
+        # weights[(start, None, 0)] = 0
 
         while not fringe.isEmpty():
             curr_state = fringe.pop()
@@ -181,16 +181,54 @@ class SearchAgent():
         #
         # print("\n SUM: ", sum([r[2] for r in result]))
 
-        print(goal[0].path, goal[0].cost_so_far)
+        print("Nodes expanded: ", len(closed))
+        print("Path: ", goal[0].path)
+        print("cost: ", goal[0].cost_so_far)
 
         return goal
 
-    def nullHeuristic(state, problem=None):
+    def nullHeuristic(self, state):
         """
         A heuristic function estimates the cost from the current state to the nearest
         goal in the provided SearchProblem.  This heuristic is trivial.
         """
         return 0
+
+    def naiveHeuristic(self, state):
+        return max(0, state.TA_left - 1)
+
+    def mstHeuristic(self, state):
+        
+
+    def astar(self, heuristic=naiveHeuristic):
+        """Search the node of least total cost first."""
+        # path, weights = {}, {}
+        closed = set()
+        fringe = utils.PriorityQueue()
+        start = self.start_state
+        fringe.push((start, None, 0), heuristic(self, start))
+        goal = None
+
+        while not fringe.isEmpty():
+            curr_state = fringe.pop()
+            state = curr_state[0]
+
+            if state.isGoalState():
+                goal = curr_state
+                break
+
+            if state not in closed:
+                closed.add(state)
+                successors = state.getSuccessors(self.graph)
+                for next_state in successors:
+                    if next_state[0] not in closed:
+                        fringe.push(next_state, next_state[0].cost_so_far + heuristic(self, next_state[0]))
+
+        print("Nodes expanded: ", len(closed))
+        print("Path: ", goal[0].path)
+        print("cost: ", goal[0].cost_so_far)
+
+        return goal[0].path
 
     def aStarSearch(problem, heuristic=nullHeuristic):
         """Search the node that has the lowest combined cost and heuristic first."""
@@ -224,6 +262,7 @@ class SearchAgent():
         #    result.append(goal[1])
         #    goal = path[goal]
         #result = result[::-1]
+
 
         print(goal.path)
 

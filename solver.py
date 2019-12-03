@@ -28,7 +28,9 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     """
     list_of_locations=[str(i) for i in list_of_locations]
     searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location,list_of_locations)
-    print(searchAgent.uniformCostSearch())
+    print(searchAgent.astar())
+
+
 def runSolver(inputFile):
     input_data = utils.read_file(inputFile)
     params=[]
@@ -102,5 +104,5 @@ def solve_all(input_directory, output_directory, params=[]):
 
 
 if __name__ == "__main__":
-    fname = "inputs/293_50.in"
+    fname = "inputs/67_50.in"
     runSolver(fname)
