@@ -80,7 +80,8 @@ class GameState():
 
         #new_gs.cost_so_far += cost
         #new_gs.path.append(action)
-        return new_gs
+
+        return new_gs, action, cost
 
     def getSucessors(self, graph):
         actions = self.get_legal_actions(graph)
@@ -132,8 +133,14 @@ class SearchAgent():
                         path[next_state] = curr_state
                         weights[next_state] = weights[curr_state] + next_state[2]
                         fringe.push(next_state, weights[next_state])
-        #print(goal.path)
-        return goal
+
+        result = []
+        while goal[1] != None:
+            result.append(goal[1])
+            goal = path[goal]
+        result = result[::-1]
+        print(result)
+        return result
 
     def nullHeuristic(state, problem=None):
         """
