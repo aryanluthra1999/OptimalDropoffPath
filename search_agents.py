@@ -96,7 +96,10 @@ class GameState():
             else:
                 costs +=[netx.dijkstra_path_length(G, str(self.location), str(home), weight='weight')]
 
-        return (min(costs),np.argmin(np.array(costs)))
+        if sum(np.array(self.homes_reached) == False) <=0:
+            return 0, -1
+
+        return (min(costs), np.argmin(np.array(costs)))
 
     def successor(self, action, cost, G):
         new_gs = self.copy()
@@ -199,7 +202,7 @@ class SearchAgent():
         return 0
 
     def naiveHeuristic(self, state):
-        return max(0, state.TA_left - 1)
+        return 2/3*max(0, state.TA_left - 1 + state.get_dropoff_cost_and_loc(self.graph)[0] + state.go_home_cost(self.graph))
 
     def mstHeuristic(self, state):
         locations = []
@@ -225,10 +228,10 @@ class SearchAgent():
         #print(Tcsr)
 
         result = np.sum(Tcsr)
-        result += self.distance(state.location, state.start) + state.get_dropoff_cost_and_loc(self.graph)[0]
-        #print(result)
+        result += state.get_dropoff_cost_and_loc(self.graph)[0]
+        print(result)
 
-        return 2/3* result
+        return 2/3 * result
 
 
     def distance(self, loc1, loc2):
@@ -246,7 +249,7 @@ class SearchAgent():
             return dist
 
 
-    def astar(self, heuristic=mstHeuristic):
+    def astar(self, heuristic=naiveHeuristic):
         """Search the node of least total cost first."""
         # path, weights = {}, {}
         closed = set()
