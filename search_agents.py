@@ -107,14 +107,16 @@ class SearchAgent():
         self.start_state = GameState(homes_arr, soda_loc)
         self.graph = util170.adjacency_matrix_to_graph(adj_matrix)  ## maybe we want a graph object from network x instead
 
-    def uniformCostSearch(self, problem):
+    def uniformCostSearch(self):
         """Search the node of least total cost first."""
+        path, weights = {}, {}
         closed = set()
-        weights = {}
         fringe = utils.PriorityQueue()
         start = self.start_state
         fringe.push((start, None, 0), 0)
         goal = None
+
+        path[(start, None, 0)] = None
         weights[(start, None, 0)] = 0
 
         while not fringe.isEmpty():
