@@ -1,21 +1,26 @@
 import numpy as np
 import utils
 import scipy as sp
-import networkx
+import networkx as netx
 
 def get_neighbours_and_weights(graph, location):
     ## return in the form of
     #################### FILL IN HERE ################
-    neighbours= []
+    nearby_neighbors=graph.neigbors(location)
+    neighbours=[]
     weights = []
+    for n in nearby_neighbors:
+        weights+=[G.edges[(location,n)]['weight']]
+        neighbours+=[n]
     return neighbours, weights
 
 class GameState():
-    def __init__(self, homes_locations, location = "Soda"):
+    def __init__(self, homes_locations, location):
         self.location = location
         self.TA_left = len(homes_locations)
         self.homes_locations = homes_locations
         self.homes_reached = [False for _ in homes_locations]
+        self.start = location
         #self.path = []
         #self.cost_so_far = 0
 
@@ -28,17 +33,15 @@ class GameState():
         result.homes_reached = self.homes_reached
         #result.path = self.path
         #result.cost_so_far = self.cost_so_far
-
         return result
 
-    def go_home_cost(self):
+    def go_home_cost(self,graph):
         ### run dijkstras here to get home cost
-        return 10
-
+        return netx.dijkstra_path_length(G, self.location, self.home, weight='weight')
     def get_legal_actions(self, graph):
 
         if self.TA_left == 0:
-            cost = self.go_home_cost()
+            cost = self.go_home_cost(graph)
             result = [("go_home", cost)]
             return result
 
@@ -60,7 +63,10 @@ class GameState():
         ## returned tuple is of the form:
         ## (cost to nearest home, index of nearest home in self.homes_locations)
         ################ FILL IN HERE #################
-        return 1, 0
+        costs=[]
+        for home in self.homes_locations:
+            costs+=[netx.dijkstra_path_length(G, self.location, self.home, weight='weight')]
+        return (min(costs),self.homes_locations[costs.index(min(costs))])
 
     def successor(self, action, cost):
         new_gs = self.copy()
@@ -70,6 +76,7 @@ class GameState():
             new_gs.homes_reached[self.get_dropoff_cost_and_loc()[1]] = True
         else:
             ############# FILL IN HERE ############
+            new_gs.location=action
 
         #new_gs.cost_so_far += cost
         #new_gs.path.append(action)
@@ -88,7 +95,7 @@ class GameState():
     def isGoalState(self):
         result = self.TA_left == 0
         result = result and sum(np.array(self.homes_reached) == False) == 0
-        result = result and self.location == "Soda"  ### FIX IF NESSECARY
+        result = result and self.location == self.start  ### FIX IF NESSECARY
 
         return result
 
@@ -97,7 +104,7 @@ class SearchAgent():
 
     def __init__(self, adj_matrix, homes_arr, soda_loc):
         self.start_state = GameState(homes_arr, soda_loc)
-        self.graph = adj_matrix  ## maybe we want a graph object from network x instead
+        self.graph = numx.from_numpy_matrix(adj_matrix)  ## maybe we want a graph object from network x instead
 
     def uniformCostSearch(self, problem):
         """Search the node of least total cost first."""
@@ -125,7 +132,6 @@ class SearchAgent():
                         path[next_state] = curr_state
                         weights[next_state] = weights[curr_state] + next_state[2]
                         fringe.push(next_state, weights[next_state])
-
         #print(goal.path)
         return goal
 
@@ -170,6 +176,3 @@ class SearchAgent():
         result = result[::-1]
         print(result)
         return result
-
-
-
