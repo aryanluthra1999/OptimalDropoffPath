@@ -1,4 +1,8 @@
 import sys, os
+import sys
+import inspect
+import heapq, random
+
 
 def get_files_with_extension(directory, extension):
     files = []
