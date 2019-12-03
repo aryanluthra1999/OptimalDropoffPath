@@ -26,8 +26,13 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
         A dictionary mapping drop-off location to a list of homes of TAs that got off at that particular location
         NOTE: both outputs should be in terms of indices not the names of the locations themselves
     """
-    searchAgent = Search(adjacency_matrix,homes_arr,starting_car_location)
+    searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location)
     print(searchAgent.uniformCostSearch())
+def runSolver(inputFile):
+    input_data = utils.read_file(inputFile)
+    params=[]
+    num_of_locations, num_houses, list_locations, list_houses, starting_car_location, adjacency_matrix = data_parser(input_data)
+    solve(list_locations, list_houses, starting_car_location, adjacency_matrix, params=params)
 
 """
 ======================================================================
@@ -79,7 +84,7 @@ def solve_all(input_directory, output_directory, params=[]):
         solve_from_file(input_file, output_directory, params=params)
 
 
-if __name__=="__main__":
+"""if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Parsing arguments')
     parser.add_argument('--all', action='store_true', help='If specified, the solver is run on all files in the input directory. Else, it is run on just the given input file')
     parser.add_argument('input', type=str, help='The path to the input file or directory')
@@ -92,4 +97,9 @@ if __name__=="__main__":
         solve_all(input_directory, output_directory, params=args.params)
     else:
         input_file = args.input
-        solve_from_file(input_file, output_directory, params=args.params)
+        solve_from_file(input_file, output_directory, params=args.params)"""
+
+
+if __name__ == "__main__":
+    fname = "inputs/7_50.in"
+    runSolver(fname)
