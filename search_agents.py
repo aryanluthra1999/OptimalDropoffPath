@@ -6,7 +6,7 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import minimum_spanning_tree
 from networkx.algorithms.approximation.steinertree import steiner_tree
 from pprint import pprint
-from multiprocessing import Process
+from multiprocessing import Process, Manager
 from itertools import chain, combinations
 
 def powerset(iterable):
@@ -157,9 +157,11 @@ class SearchAgent():
         mapping = dict(zip(self.graph,locs))
         self.graph = netx.relabel_nodes(self.graph, mapping)
         self.distanceMemo=dict()
-        self.steinerMemo = dict()
-        full_args = [i+tuple(self.start_state.start) for i in powerset(self.start_state.homes_locations)]
-        pros = [Process(target=self.steinerHeuristicMemo,args = i) for i in full_args]
+        manager = Manager()
+        self.steinerMemo = manager.dict()
+        full_args = [list(i)+[self.start_state.start] for i in powerset(self.start_state.homes_locations)]
+
+        pros = [Process(target=self.steinerHeuristicMemo,args = [i]) for i in full_args]
         for p in pros:
             p.start()
         for p in pros:
@@ -245,7 +247,6 @@ class SearchAgent():
 
         result = np.sum(Tcsr)
         result += state.get_dropoff_cost_and_loc(self.graph)[0]
-        print(result)
 
         return 2/3 * result
 
