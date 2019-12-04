@@ -28,9 +28,32 @@ class OrderApproximator:
     def get_dropoff_ordering(self):
         mst = self.get_steiner_tree()
         preorder_nodes = dfs_preorder_nodes(mst, source=self.start_loc)
-        final_order = list(preorder_nodes)
+
+        preorder_nodes = list(preorder_nodes)
+
+        final_order = [n for n in preorder_nodes if n in self.homes]
 
         print(final_order)
+
+        return final_order
+
+    def get_drop_path(self):
+
+        result = []
+        curr_loc = self.start_loc
+
+        order = self.get_dropoff_ordering()
+
+        for i in range(len(order)):
+            home = order[i]
+
+            shortest_path = netx.shortest_path(self.graph, source=self.start_loc, target=home)
+
+            for node in shortest_path
+
+
+        return order
+
 
 
 
