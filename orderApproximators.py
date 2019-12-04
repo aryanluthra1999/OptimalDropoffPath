@@ -49,7 +49,8 @@ class OrderApproximator:
 
             shortest_path = netx.shortest_path(self.graph, source=self.start_loc, target=home)
 
-            for node in shortest_path
+            for node in shortest_path:
+                break
 
 
         return order
