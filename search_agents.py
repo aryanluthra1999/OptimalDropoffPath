@@ -7,7 +7,6 @@ from scipy.sparse.csgraph import minimum_spanning_tree
 from networkx.algorithms.approximation.steinertree import steiner_tree
 from pprint import pprint
 from multiprocessing import Process
-
 from itertools import chain, combinations
 
 def powerset(iterable):
