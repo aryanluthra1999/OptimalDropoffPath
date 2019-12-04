@@ -252,15 +252,25 @@ class SearchAgent():
 
         k = tuple(homes_to_visit)
 
-        if k in self.steinerMemo:
+        """if k in self.steinerMemo:
             result = self.steinerMemo[k]
         else:
             result = steiner_tree(self.graph, homes_to_visit, weight='weight').size(weight='weight')
-            self.steinerMemo[k] = result
+            self.steinerMemo[k] = result"""
 
+        result = self.steinerMemo[l]
         result += state.get_dropoff_cost_and_loc(self.graph)[0]
 
         return 2/3*result
+
+    def steinerHeuristicMemo(self,homes,reached):
+        homes_to_visit=[]
+        for i in range(len(homes)):
+            if(state.homes_reached[i]==False):
+                homes_to_visit+=[state.homes_locations[i]]
+        self.steinerMemo[tuple(homes_to_visit)]=steiner_tree(self.graph,homes_to_visit,weight='weight').size(weight='weight')
+
+
 
 
     def distance(self, loc1, loc2):
@@ -280,12 +290,23 @@ class SearchAgent():
 
     def astar(self, heuristic=steinerHeuristic):
         """Search the node of least total cost first."""
+
+def f(name):
+    print 'hello', name
+
+if __name__ == '__main__':
+    p = Process(target=f, args=('bob',))
+    p.start()
+    p.join()
         # path, weights = {}, {}
         closed = set()
         fringe = utils.PriorityQueue()
         start = self.start_state
         fringe.push((start, None, 0), heuristic(self, start))
         goal = None
+        p = process(target=self.steinerHeuristic,args=(power_set))
+        p.start()
+        p.join()
 
         while not fringe.isEmpty():
             curr_state = fringe.pop()
