@@ -4,6 +4,7 @@ import networkx as netx
 import student_utils as util170
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import minimum_spanning_tree
+from networkx.algorithms.approximation.steinertree import steiner_tree
 from pprint import pprint
 
 def get_neighbours_and_weights(graph, location):
@@ -148,6 +149,7 @@ class SearchAgent():
         mapping = dict(zip(self.graph,locs))
         self.graph = netx.relabel_nodes(self.graph, mapping)
         self.distanceMemo=dict()
+        self.steinerMemo = dict()
 
 
 
@@ -244,7 +246,21 @@ class SearchAgent():
         for i in range(len(state.homes_locations)):
             if state.homes_reached[i]==False:
                 homes_to_visit+=[state.homes_locations[i]]
-        return netx.steiner_tree(self.graph, homes_to_visit, weight='weight').size(weight='weight')
+
+
+        homes_to_visit.append(state.start)
+
+        k = tuple(homes_to_visit)
+
+        if k in self.steinerMemo:
+            result = self.steinerMemo[k]
+        else:
+            result = steiner_tree(self.graph, homes_to_visit, weight='weight').size(weight='weight')
+            self.steinerMemo[k] = result
+
+        result += state.get_dropoff_cost_and_loc(self.graph)[0]
+
+        return 2/3*result
 
 
     def distance(self, loc1, loc2):
@@ -262,7 +278,7 @@ class SearchAgent():
             return dist
 
 
-    def astar(self, heuristic=naiveHeuristic):
+    def astar(self, heuristic=steinerHeuristic):
         """Search the node of least total cost first."""
         # path, weights = {}, {}
         closed = set()
