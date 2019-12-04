@@ -233,6 +233,19 @@ class SearchAgent():
 
         return 2/3 * result
 
+    def steinerHeuristic(self,state):
+        """
+        start with a subtree T consisting of one given terminal vertex
+        while T does not span all terminals
+            select a termoinal x not in T that is closest to a vertex in # T
+            add to T the shortest path that connects x with T """
+
+        homes_to_visit=[]
+        for i in range(len(state.homes_locations)):
+            if state.homes_reached[i]==False:
+                homes_to_visit+=[state.homes_locations[i]]
+        return netx.steiner_tree(self.graph, homes_to_visit, weight='weight').size(weight='weight')
+
 
     def distance(self, loc1, loc2):
         ## new dijkstras method but with memoized distances
