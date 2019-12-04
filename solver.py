@@ -5,6 +5,7 @@ sys.path.append('../..')
 import argparse
 import utils
 import search_agents as search
+import orderApproximators
 
 from student_utils import *
 """
@@ -27,9 +28,17 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
         NOTE: both outputs should be in terms of indices not the names of the locations themselves
     """
     list_of_locations=[str(i) for i in list_of_locations]
-    searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location,list_of_locations)
 
-    result = searchAgent.astar()
+    # searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location,list_of_locations)
+    #
+    # result = searchAgent.astar()
+
+    order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
+
+    result = order_approx_agent.get_dropoff_ordering()
+
+
+
 
 
 def runSolver(inputFile):
