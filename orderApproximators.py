@@ -5,6 +5,7 @@ import student_utils as util170
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import minimum_spanning_tree
 from networkx.algorithms.approximation.steinertree import steiner_tree
+from networkx.algorithms.traversal.depth_first_search import dfs_preorder_nodes
 from pprint import pprint
 from multiprocessing import Process, Manager
 from itertools import chain, combinations
@@ -18,7 +19,19 @@ class OrderApproximator:
         self.start_loc = soda_loc
         self.homes = homes_arr
 
+    def get_steiner_tree(self):
+        homes_to_visit = self.homes.copy()
+        homes_to_visit.append(self.start_loc)
+        result = steiner_tree(self.graph, homes_to_visit, weight='weight')
+        return result
 
     def get_dropoff_ordering(self):
-        homes_to_visit = []
-        homes_to_visit.append(self.start_loc)
+        mst = self.get_steiner_tree()
+        preorder_nodes = dfs_preorder_nodes(mst, source=self.start_loc)
+        final_order = list(preorder_nodes)
+
+        print(final_order)
+
+
+
+
