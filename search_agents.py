@@ -156,16 +156,19 @@ class SearchAgent():
         self.graph = util170.adjacency_matrix_to_graph(adj_matrix)[0]  ## maybe we want a graph object from network x instead
         mapping = dict(zip(self.graph,locs))
         self.graph = netx.relabel_nodes(self.graph, mapping)
-        self.distanceMemo=dict()
-        manager = Manager()
-        self.steinerMemo = manager.dict()
-        full_args = [list(i)+[self.start_state.start] for i in powerset(self.start_state.homes_locations)]
+        self.distanceMemo = dict()
+        self.steinerMemo = dict()
 
-        pros = [Process(target=self.steinerHeuristicMemo,args = [i]) for i in full_args]
-        for p in pros:
-            p.start()
-        for p in pros:
-            p.join()
+
+        # manager = Manager()
+        # self.steinerMemo = manager.dict()
+        # full_args = [list(i)+[self.start_state.start] for i in powerset(self.start_state.homes_locations)]
+        #
+        # pros = [Process(target=self.steinerHeuristicMemo,args = [i]) for i in full_args]
+        # for p in pros:
+        #     p.start()
+        # for p in pros:
+        #     p.join()
 
 
 
@@ -266,20 +269,16 @@ class SearchAgent():
 
         k = tuple(homes_to_visit)
 
-        """if k in self.steinerMemo:
+        if k in self.steinerMemo:
             result = self.steinerMemo[k]
         else:
             result = steiner_tree(self.graph, homes_to_visit, weight='weight').size(weight='weight')
-            self.steinerMemo[k] = result"""
+            self.steinerMemo[k] = result
 
         result = self.steinerMemo[k]
         result += state.get_dropoff_cost_and_loc(self.graph)[0]
 
         return 2/3*result
-
-    def steinerHeuristicMemo(self,homes_left):
-        self.steinerMemo[tuple(homes_left)]=steiner_tree(self.graph, homes_left, weight='weight').size(weight='weight')
-
 
     def distance(self, loc1, loc2):
         ## new dijkstras method but with memoized distances
