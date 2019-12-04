@@ -6,6 +6,14 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import minimum_spanning_tree
 from networkx.algorithms.approximation.steinertree import steiner_tree
 from pprint import pprint
+from itertools import chain, combinations
+
+
+
+def powerset(iterable):
+    "powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)"
+    s = list(iterable)
+    return chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
 
 def get_neighbours_and_weights(graph, location):
     ## return in the form of
