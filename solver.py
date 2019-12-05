@@ -31,11 +31,11 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
         A dictionary mapping drop-off location to a list of homes of TAs that got off at that particular location
         NOTE: both outputs should be in terms of indices not the names of the locations themselves
     """
-    list_of_locations=[str(i) for i in list_of_locations]
-
-    searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location,list_of_locations)
-
-    result = searchAgent.astar()
+    # list_of_locations=[str(i) for i in list_of_locations]
+    #
+    # searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location,list_of_locations)
+    #
+    # result = searchAgent.astar()
 
     order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
 
@@ -121,5 +121,5 @@ def solve_all(input_directory, output_directory, params=[]):
 
 
 if __name__ == "__main__":
-    fname = "inputs/67_50.in"
+    fname = "inputs/7_50.in"
     runSolver(fname)

@@ -60,7 +60,12 @@ class OrderApproximator:
         result = steiner_tree(self.graph, homes_to_visit, weight='weight')
         return result
 
-    def get_dropoff_ordering(self):
+
+    def get_mst(self):
+        return netx.minimum_spanning_tree(self.graph)
+
+
+    def get_dropoff_ordering_steiner(self):
         mst = self.get_steiner_tree()
         preorder_nodes = dfs_preorder_nodes(mst, source=self.start_loc)
 
@@ -72,12 +77,29 @@ class OrderApproximator:
 
         return final_order
 
-    def get_drop_path(self):
+    def get_dropoff_ordering_mst(self):
+
+        mst = self.get_mst()
+
+        preorder_nodes = dfs_preorder_nodes(mst, source=self.start_loc)
+
+        preorder_nodes = list(preorder_nodes)
+
+        final_order = [n for n in preorder_nodes if n in self.homes]
+
+        #print(final_order)
+
+        return final_order
+
+
+    def get_drop_path(self, tree_func = get_dropoff_ordering_steiner):
+
+
 
         curr_loc = self.start_loc
         result = [curr_loc]
         #pdb.set_trace()
-        order = self.get_dropoff_ordering()
+        order = tree_func(self)
 
         print("Dropoff ordering: ", order)
 
@@ -131,4 +153,3 @@ class OrderApproximator:
 
 
         return result
-
