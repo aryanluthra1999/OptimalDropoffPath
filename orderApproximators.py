@@ -156,9 +156,8 @@ class OrderApproximator:
 
     def bootstrap_approx(self):
         best=float("inf")
-        for i in tqdm(range(1000)):
+        for i in tqdm(range(100000)):
             result=self.get_drop_path()
             new=util170.cost_of_solution(self.graph,result[0],result[1])[0]
-            if new<best:
-                best=new
+            best = min(best, new)
         return best
