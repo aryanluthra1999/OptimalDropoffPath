@@ -8,7 +8,7 @@ import search_agents as search
 import orderApproximators
 import SteinerApproxSolver
 import networkx as netx
-
+from output_validator.py import tests
 import time
 from student_utils import cost_of_solution
 from student_utils import *
@@ -45,7 +45,6 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     #result = order_approx_agent.bootstrap_approx()
     from student_utils import cost_of_solution
     #print(result)
-
 
     steiner_approx_solver = SteinerApproxSolver.SteinerApproxSolver(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
     brr=steiner_approx_solver.solveSteinerTreeDTH()
@@ -106,6 +105,17 @@ def solve_all(input_directory, output_directory, params=[]):
 
     for input_file in input_files:
         solve_from_file(input_file, output_directory, params=params)
+
+def compareSolution(fileName,sol):
+    better=False
+    input_file =  utils.read_file(fileName)
+    if path.exists(fileName[0:fileName.index('.')+1]+'out'):
+        return better
+    else:
+        output_file = utils.read_file(fileName[0:filename.index('.')+1]+'out')
+        if costs(input_file,output_file,[])<sol):
+            better=True
+        return better
 
 
 """if __name__=="__main__":
