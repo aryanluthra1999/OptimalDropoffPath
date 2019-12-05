@@ -1,15 +1,16 @@
-AndyandZeyu c j i f AndyandZeyu f0 j0 AndyandZeyu g1 h1 i1 j1 AndyandZeyu g2 j2 f2 h2 i2 e2 AndyandZeyu f3 j3 g3 i3 AndyandZeyu f4 i4 h4 g4 AndyandZeyu h5 j4 f5 i5 e5 AndyandZeyu f6 g6 h6 i6 AndyandZeyu f7 i7 j6 g7 h7 d7 AndyandZeyu j8 f8 AndyandZeyu
-39
-j g j
+AndyandZeyu g j i h AndyandZeyu f0 j0 AndyandZeyu g1 h1 i1 j1 AndyandZeyu g2 j2 f2 h2 i2 e2 AndyandZeyu f3 j3 g3 i3 AndyandZeyu b4 i4 h4 g4 AndyandZeyu h5 j4 f5 i5 e5 AndyandZeyu f6 g6 h6 i6 AndyandZeyu f7 i7 j6 g7 h7 d7 AndyandZeyu g8 f8 j8 AndyandZeyu
+40
+AndyandZeyu f i8
+g g
+j j
 i i
-f f
-AndyandZeyu h i8
+h h
 f0 i0 h0 g0 f0
 j0 j0
 g1 g1
-h1 h1
+h1 f1 h1
 i1 i1
-j1 f1 j1
+j1 j1
 g2 g2
 j2 j2
 f2 f2
@@ -19,8 +20,7 @@ f3 f3
 j3 j3
 g3 h3 g3
 i3 i3
-f4 f4
-i4 i4
+i4 f4 i4
 h4 h4
 g4 g4
 h5 h5
@@ -37,5 +37,6 @@ i7 i7
 j6 j6
 g7 g7
 h7 h7
+g8 g8
+f8 h8 f8
 j8 j7 j8
-f8 h8 g8 f8
