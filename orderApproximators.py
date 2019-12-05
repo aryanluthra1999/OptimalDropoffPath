@@ -9,6 +9,7 @@ from networkx.algorithms.traversal.depth_first_search import dfs_preorder_nodes
 from pprint import pprint
 from multiprocessing import Process, Manager
 from itertools import chain, combinations
+import time
 #import pdb
 from tqdm import tqdm
 
@@ -155,9 +156,13 @@ class OrderApproximator:
         return result
 
     def bootstrap_approx(self):
-        best=float("inf")
-        for i in tqdm(range(100000)):
-            result=self.get_drop_path()
-            new=util170.cost_of_solution(self.graph,result[0],result[1])[0]
-            best = min(best, new)
+        best = float("inf")
+        for i in range(100):
+            time.sleep(3)
+            for i in tqdm(range(10)):
+                result = self.get_drop_path()
+                new = util170.cost_of_solution(self.graph,result[0],result[1])[0]
+                best = min(best, new)
+            print("Best: ", best)
+
         return best
