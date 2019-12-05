@@ -45,6 +45,8 @@ class OrderApproximator:
         order = self.get_dropoff_ordering()
         order.append(self.start_loc)
 
+        print(order)
+
 
         for i in range(len(order) - 1):
             home = order[i]
