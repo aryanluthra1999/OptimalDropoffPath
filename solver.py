@@ -8,10 +8,12 @@ import search_agents as search
 import orderApproximators
 import SteinerApproxSolver
 import networkx as netx
-from output_validator import tests
+import output_validator
 import time
 from student_utils import cost_of_solution
+from student_utils import convert_locations_to_indices
 from student_utils import *
+
 
 """
 ======================================================================
@@ -49,19 +51,20 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
                                                               list_of_locations)
     result = order_approx_agent.get_drop_path()
+    #print(cost_of_solution(graph, result[0], result[1]))
 
-    print(cost_of_solution(graph, result[0], result[1]))
-
-    steiner_approx_solver = SteinerApproxSolver.SteinerApproxSolver(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
+    """steiner_approx_solver = SteinerApproxSolver.SteinerApproxSolver(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
     brr=steiner_approx_solver.solveSteinerTreeDTH()
     steiner_approx_solver_order = cost_of_solution(graph,brr[0],brr[1])
-    print(steiner_approx_solver_order)
+    print(steiner_approx_solver_order)"""
+
+    return result+[cost_of_solution(graph,result[0],result[1])[0]]
 
 def runSolver(inputFile):
     input_data = utils.read_file(inputFile)
     params=[]
     num_of_locations, num_houses, list_locations, list_houses, starting_car_location, adjacency_matrix = data_parser(input_data)
-    solve(list_locations, list_houses, starting_car_location, adjacency_matrix, params=params)
+    result=solve(list_locations, list_houses, starting_car_location, adjacency_matrix, params=params)
 
 """
 ======================================================================
@@ -96,33 +99,44 @@ def solve_from_file(input_file, output_directory, params=[]):
 
     input_data = utils.read_file(input_file)
     num_of_locations, num_houses, list_locations, list_houses, starting_car_location, adjacency_matrix = data_parser(input_data)
-    car_path, drop_offs = solve(list_locations, list_houses, starting_car_location, adjacency_matrix, params=params)
-
-    basename, filename = os.path.split(input_file)
+    result=solve(list_locations, list_houses, starting_car_location, adjacency_matrix, params=params)
+    new_keys = convert_locations_to_indices(result[1].keys(), list_locations)
+    new_dict = dict()
+    old_keys = list(result[1].keys())
+    for i in range(len(old_keys)):
+        new_dict[new_keys[i]] = convert_locations_to_indices(result[1][old_keys[i]],list_locations)
+    compareSolution(input_file,result[2],result[0],new_dict,list_locations,output_directory)
+    """basename, filename = os.path.split(input_file)
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
     output_file = utils.input_to_output(input_file, output_directory)
 
-    convertToFile(car_path, drop_offs, output_file, list_locations)
+    convertToFile(car_path, drop_offs, output_file, list_locations)"""
 
 
 def solve_all(input_directory, output_directory, params=[]):
     input_files = utils.get_files_with_extension(input_directory, 'in')
 
     for input_file in input_files:
-        solve_from_file(input_file, output_directory, params=params)
+        if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
+            solve_from_file(input_file, output_directory, params=params)
 
-def compareSolution(fileName,sol,path,dropoff_mapping,list_locs):
+def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_directory):
     input_file =  utils.read_file(fileName)
-    if path.exists(fileName[0:fileName.index('.')+1]+'out'):
-        output_file = utils.read_file(fileName[0:filename.index('.')+1]+'out')
-        if costs(input_file,output_file,[])>sol):
-            convertToFile(path, dropoff_mapping,fileName[0:filename.index('.')+1]+'out', list_locs)
+    print('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
+    if os.path.exists('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out'):
+        output_file = utils.read_file('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
+        if output_validator.tests(input_file,output_file,[])[0]>sol:
+            print("better solution found")
+            output_file = utils.input_to_output(fileName, output_directory)
+            convertToFile(convert_locations_to_indices(path,list_locs), dropoff_mapping, output_file, list_locs)
+
     else:
         print('No previous solution.')
+        output_file = utils.input_to_output(fileName, output_directory)
+        convertToFile(convert_locations_to_indices(path,list_locs), dropoff_mapping, output_file, list_locs)
 
-
-"""if __name__=="__main__":
+if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Parsing arguments')
     parser.add_argument('--all', action='store_true', help='If specified, the solver is run on all files in the input directory. Else, it is run on just the given input file')
     parser.add_argument('input', type=str, help='The path to the input file or directory')
@@ -135,9 +149,9 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs):
         solve_all(input_directory, output_directory, params=args.params)
     else:
         input_file = args.input
-        solve_from_file(input_file, output_directory, params=args.params)"""
+        solve_from_file(input_file, output_directory, params=args.params)
 
 
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     fname = "inputs/7_50.in"
-    runSolver(fname)
+    runSolver(fname)"""
