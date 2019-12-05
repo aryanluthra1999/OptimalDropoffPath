@@ -39,8 +39,8 @@ class OrderApproximator:
 
     def get_drop_path(self):
 
-        result = []
         curr_loc = self.start_loc
+        result = [curr_loc]
 
         order = self.get_dropoff_ordering()
         order.append(self.start_loc)
@@ -52,6 +52,7 @@ class OrderApproximator:
             shortest_path = netx.shortest_path(self.graph, source=curr_loc, target=home)
 
             for node in shortest_path:
+                curr_loc = node
 
                 cont_path_cost = 2/3*(netx.dijkstra_path_length(self.graph, source=curr_loc, target=home)
                                       + netx.dijkstra_path_length(self.graph, source=home, target=next_home))
@@ -65,31 +66,32 @@ class OrderApproximator:
                 else:
                     result.append(node)
                     curr_loc = node
-        locs=[]
-        dropoffs=dict()
-        curr='b'
-        for i in range(len(result)):
-            if i!=0 and result[i-1][0:8]=='drop off':
-                continue
-            else:
-                if(len(result[i])==7 and result[i]=='go_home'):
-                    break
-                if (len(result[i])<8):
-                    curr=result[i]
-                    locs+=[curr]
-                if len(result[i])>8 and result[i][0:8]=='drop off':
-                    if curr not in dropoffs.keys():
-                        dropoffs[curr]=[result[i][9:]]
-                    else:
-                        dropoffs[curr]=dropoffs[curr]+[result[i][9:]]
+            result.append("go_home")
+            locs=[]
+            dropoffs=dict()
+            curr='b'
+            for i in range(len(result)):
+                if i!=0 and result[i-1][0:8]=='drop off':
+                    continue
                 else:
-                    curr=result[i]
-                    locs+=[curr]
-        back_home=netx.shortest_path(self.graph,locs[len(locs)-1],locs[0])
-        print(back_home)
-        for b in back_home:
-            locs.append(b)
-        print(dropoffs)
-        print(locs)
-        print(result)
-        return result
+                    if(len(result[i])==7 and result[i]=='go_home'):
+                        break
+                    if (len(result[i])<8):
+                        curr=result[i]
+                        locs+=[curr]
+                    if len(result[i])>8 and result[i][0:8]=='drop off':
+                        if curr not in dropoffs.keys():
+                            dropoffs[curr]=[result[i][9:]]
+                        else:
+                            dropoffs[curr]=dropoffs[curr]+[result[i][9:]]
+                    else:
+                        curr=result[i]
+                        locs+=[curr]
+            back_home=netx.shortest_path(self.graph,locs[len(locs)-1],locs[0])
+            print(back_home)
+            for b in back_home:
+                locs.append(b)
+            print(dropoffs)
+            print(locs)
+            print(result)
+            return result
