@@ -7,6 +7,8 @@ import utils
 import search_agents as search
 import orderApproximators
 import SteinerApproxSolver
+import networkx as netx
+
 
 from student_utils import *
 """
@@ -34,18 +36,20 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     #
     # result = searchAgent.astar()
 
-    order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
+    #order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
 
     graph = adjacency_matrix_to_graph(adjacency_matrix)[0]  ## maybe we want a graph object from network x instead
     mapping = dict(zip(graph, list_of_locations))
     graph = netx.relabel_nodes(graph, mapping)
-    result = order_approx_agent.bootstrap_approx()
+    #result = order_approx_agent.bootstrap_approx()
     from student_utils import cost_of_solution
-    print(result)
+    #print(result)
 
 
     steiner_approx_solver = SteinerApproxSolver.SteinerApproxSolver(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
-    steiner_approx_solver_order = steiner_approx_solver.solveSteinerTreeDTH()
+    brr=steiner_approx_solver.solveSteinerTreeDTH()
+    steiner_approx_solver_order = cost_of_solution(graph,brr[0],brr[1])
+    print(steiner_approx_solver_order)
 
 def runSolver(inputFile):
     input_data = utils.read_file(inputFile)
@@ -120,5 +124,5 @@ def solve_all(input_directory, output_directory, params=[]):
 
 
 if __name__ == "__main__":
-    fname = "inputs/67_50.in"
+    fname = "inputs/7_50.in"
     runSolver(fname)
