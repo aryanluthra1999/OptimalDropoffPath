@@ -1,11 +1,18 @@
-stop0 stop8 stop13 stop24 stop0 stop26 stop131 stop27 stop29 stop30 stop40 stop44 stop46 stop47 stop50 stop51 stop62 stop63 stop74 stop81 stop82 stop92 stop90 stop91 stop0 stop106 stop107 stop109 stop112 stop116 stop118 stop122 stop4 stop15 stop35 stop2 stop73 stop105 stop110 stop3 stop138 stop10 stop17 stop18 stop19 stop28 stop60 stop79 stop88 stop142 stop1 stop147 stop158 stop8 stop39 stop56 stop61 stop84 stop93 stop99 stop100 stop102 stop113 stop127 stop128 stop144 stop149 stop4 stop159 stop161 stop125 stop143 stop146 stop0 stop156 stop160 stop167 stop168 stop0
-69
-stop0 stop2 stop0 stop104 stop101
-stop8 stop8
-stop13 stop14 stop10 stop13
-stop24 stop24
-stop26 stop57 stop26
-stop131 stop131
+stop0 stop26 stop4 stop15 stop17 stop18 stop59 stop110 stop1 stop127 stop131 stop144 stop149 stop158 stop27 stop29 stop30 stop40 stop44 stop46 stop47 stop50 stop51 stop62 stop63 stop61 stop84 stop71 stop0 stop74 stop78 stop13 stop16 stop35 stop39 stop56 stop7 stop79 stop88 stop5 stop92 stop93 stop99 stop100 stop128 stop139 stop161 stop5 stop81 stop82 stop0 stop90 stop91 stop0 stop106 stop107 stop109 stop112 stop116 stop11 stop159 stop2 stop118 stop122 stop125 stop143 stop146 stop0 stop156 stop160 stop167 stop168 stop0
+63
+stop0 stop24 stop14 stop10 stop8 stop2 stop0 stop104 stop101
+stop26 stop26
+stop4 stop4
+stop15 stop102 stop15
+stop17 stop17
+stop18 stop57 stop28 stop18
+stop59 stop73 stop68 stop60 stop59
+stop110 stop110
+stop127 stop127
+stop131 stop138 stop131
+stop144 stop147 stop144
+stop149 stop149
+stop158 stop158
 stop27 stop27
 stop29 stop29
 stop30 stop30
@@ -16,11 +23,28 @@ stop47 stop47
 stop50 stop50
 stop51 stop51
 stop62 stop62
-stop63 stop71 stop69 stop63
-stop74 stop78 stop74
+stop63 stop63
+stop61 stop61
+stop84 stop69 stop84
+stop71 stop71
+stop74 stop74
+stop78 stop78
+stop13 stop13
+stop16 stop16
+stop35 stop35
+stop39 stop39
+stop56 stop56
+stop79 stop79
+stop88 stop88
+stop92 stop92
+stop93 stop93
+stop99 stop99
+stop100 stop105 stop100
+stop128 stop128
+stop139 stop139
+stop161 stop161
 stop81 stop81
 stop82 stop82
-stop92 stop92
 stop90 stop90
 stop91 stop91
 stop106 stop106
@@ -28,40 +52,10 @@ stop107 stop107
 stop109 stop109
 stop112 stop112
 stop116 stop116
-stop118 stop118
-stop122 stop122
-stop4 stop11 stop4
-stop15 stop15
-stop35 stop35
-stop73 stop73
-stop105 stop105
-stop110 stop110
-stop138 stop138
-stop17 stop17
-stop18 stop18
-stop19 stop19
-stop28 stop16 stop28
-stop60 stop60
-stop79 stop79
-stop88 stop139 stop88
-stop142 stop142
-stop147 stop147
-stop158 stop158
-stop39 stop39
-stop56 stop59 stop56
-stop61 stop68 stop61
-stop84 stop84
-stop93 stop93
-stop99 stop99
-stop100 stop100
-stop102 stop102
-stop113 stop113
-stop127 stop127
-stop128 stop128
-stop144 stop144
-stop149 stop149
+stop11 stop142 stop113 stop19 stop11
 stop159 stop159
-stop161 stop123 stop161
+stop118 stop118
+stop122 stop123 stop122
 stop125 stop125
 stop143 stop143
 stop146 stop146
