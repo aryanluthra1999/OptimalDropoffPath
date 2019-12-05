@@ -24,6 +24,7 @@ class OrderApproximator:
         self.distanceMemo = dict()
         self.start_loc = soda_loc
         self.homes = homes_arr
+        self.locs=locs
 
 
 
@@ -55,10 +56,11 @@ class OrderApproximator:
             else:
                 locs.append(back_home[i])
 
+
         #print(locs)
         #print("Drop-offs", dropoffs)
 
-        return locs,dropoffs
+        return [locs,dropoffs]
 
     def get_steiner_tree(self):
         homes_to_visit = self.homes.copy()
