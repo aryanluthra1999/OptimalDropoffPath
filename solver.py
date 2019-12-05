@@ -120,6 +120,11 @@ def solve_all(input_directory, output_directory, params=[]):
     for input_file in input_files:
         if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
             solve_from_file(input_file, output_directory, params=params)
+        if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
+            solve_from_file(input_file, output_directory, params=params)
+        if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
+            solve_from_file(input_file, output_directory, params=params)
+
 
 def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_directory):
     input_file =  utils.read_file(fileName)
