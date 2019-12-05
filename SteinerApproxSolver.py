@@ -65,6 +65,7 @@ class SteinerApproxSolver:
                 if node != current_leaf_home and node != next_leaf_home and node in self.getSteinerTree():
                     """Shares a common ancestor."""
                     """Drop off curr_node at curr->parent"""
+                    bla = networkx.dfs_predecessors(self.getSteinerTree(), source=self.start_loc)[current_leaf_home]
                     dropoffs[current_leaf_home] = networkx.dfs_predecessors(self.getSteinerTree(), source=self.start_loc)[current_leaf_home]
         print("Dropoffs ", dropoffs)
 
@@ -98,18 +99,36 @@ class SteinerApproxSolver:
                     for i in keys:
                         final_order[index] = elem+" "+i
                         index = index+1
-        print(final_order)
-        return final_order
+        return self.get_cost_params(final_order)
 
-
-
-
-
-
-
-
-
-
-
-
-
+    def get_cost_params(self,result):
+        locs=[]
+        dropoffs=dict()
+        curr=''
+        for i in range(len(result)):
+            if curr=='':
+                curr=result[i]
+                if curr in self.homes:
+                    dropoffs[curr]=[result[i][9:]]
+                locs.append(curr)
+            elif  ' ' in result[i]:
+                if curr not in dropoffs.keys():
+                    dropoffs[curr]=[result[i][result[i].index(' ')+1:]]
+                else:
+                    dropoffs[curr]=dropoffs[curr]+[result[i][result[i].index(' '):]]
+            elif i==len(result)-1:
+                locs.append(result[i])
+                break
+            else:
+                curr=result[i]
+                locs.append(curr)
+        back_home=netx.shortest_path(self.netx_graph,locs[len(locs)-1],locs[0])
+        #print(back_home)
+        for i in range(len(back_home)):
+            if i==0:
+                continue
+            else:
+                locs.append(back_home[i])
+        print(locs)
+        print(dropoffs)
+        return locs,dropoffs
