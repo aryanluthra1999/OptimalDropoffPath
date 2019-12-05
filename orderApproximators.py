@@ -67,6 +67,8 @@ class OrderApproximator:
                     result.append(node)
                     curr_loc = node
         result.append("go_home")
+        return result
+    def get_path_dropoffs(result):
         locs=[]
         dropoffs=dict()
         curr=''
@@ -86,23 +88,6 @@ class OrderApproximator:
             else:
                 curr=result[i]
                 locs.append(curr)
-
-            """if i!=0 and result[i-1][0:8]=='drop off':
-                continue
-            else:
-                if(len(result[i])==7 and result[i]=='go_home'):
-                    break
-                if (len(result[i])<8):
-                    curr=result[i]
-                    locs+=[curr]
-                if len(result[i])>8 and result[i][0:8]=='drop off':
-                    if curr not in dropoffs.keys():
-                        dropoffs[curr]=[result[i][9:]]
-                    else:
-                        dropoffs[curr]=dropoffs[curr]+[result[i][9:]]
-                else:
-                    curr=result[i]
-                    locs+=[curr]"""
         back_home=netx.shortest_path(self.graph,locs[len(locs)-1],locs[0])
         print(back_home)
         for i in range(len(back_home)):
