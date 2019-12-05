@@ -118,20 +118,20 @@ def solve_from_file(input_file, output_directory, params=[]):
 def solve_all(input_directory, output_directory, params=[]):
     input_files = utils.get_files_with_extension(input_directory, 'in')
 
-    # print("50 Files")
-    # for input_file in tqdm(input_files):
-    #     if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
-    #         solve_from_file(input_file, output_directory, params=params)
-    #
-    # print("100 Files")
-    # for input_file in tqdm(input_files):
-    #     if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
-    #         solve_from_file(input_file, output_directory, params=params)
-
-    print("200 Files")
+    print("50 Files")
     for input_file in tqdm(input_files):
-        if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
+        if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
             solve_from_file(input_file, output_directory, params=params)
+
+    print("100 Files")
+    for input_file in tqdm(input_files):
+        if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
+            solve_from_file(input_file, output_directory, params=params)
+
+    # print("200 Files")
+    # for input_file in tqdm(input_files):
+    #     if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
+    #         solve_from_file(input_file, output_directory, params=params)
 
 
 def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_directory):
