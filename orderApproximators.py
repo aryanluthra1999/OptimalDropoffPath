@@ -10,6 +10,7 @@ from pprint import pprint
 from multiprocessing import Process, Manager
 from itertools import chain, combinations
 #import pdb
+from tqdm import tqdm
 
 class OrderApproximator:
 
@@ -49,8 +50,8 @@ class OrderApproximator:
             else:
                 locs.append(back_home[i])
 
-        print(locs)
-        print("Drop-offs", dropoffs)
+        #print(locs)
+        #print("Drop-offs", dropoffs)
 
         return locs,dropoffs
 
@@ -101,7 +102,7 @@ class OrderApproximator:
         #pdb.set_trace()
         order = tree_func(self)
 
-        print("Dropoff ordering: ", order)
+        #print("Dropoff ordering: ", order)
 
         order.append(self.start_loc)
 
@@ -131,7 +132,7 @@ class OrderApproximator:
 
         result = self.postprocess(result)
 
-        print(result)
+        #print(result)
         return self.get_path_dropoffs(result)
 
     def postprocess(self, action_list):
@@ -151,5 +152,13 @@ class OrderApproximator:
                 while not dropoff_stack.isEmpty():
                     result.append(dropoff_stack.pop())
 
-
         return result
+
+    def bootstrap_approx(self):
+        best=float("inf")
+        for i in tqdm(range(1000)):
+            result=self.get_drop_path()
+            new=util170.cost_of_solution(self.graph,result[0],result[1])[0]
+            if new<best:
+                best=new
+        return best
