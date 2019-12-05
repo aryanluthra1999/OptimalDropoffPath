@@ -42,9 +42,9 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     graph = adjacency_matrix_to_graph(adjacency_matrix)[0]  ## maybe we want a graph object from network x instead
     mapping = dict(zip(graph, list_of_locations))
     graph = netx.relabel_nodes(graph, mapping)
-    result = order_approx_agent.get_drop_path()
+    result = order_approx_agent.bootstrap_approx()
     from student_utils import cost_of_solution
-    print(cost_of_solution(graph,result[0],result[1]))
+    print(result)
 
 
 
