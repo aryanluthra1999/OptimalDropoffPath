@@ -9,6 +9,7 @@ from networkx.algorithms.traversal.depth_first_search import dfs_preorder_nodes
 from pprint import pprint
 from multiprocessing import Process, Manager
 from itertools import chain, combinations
+#import pdb
 
 class OrderApproximator:
 
@@ -73,7 +74,7 @@ class OrderApproximator:
 
         curr_loc = self.start_loc
         result = [curr_loc]
-
+        #pdb.set_trace()
         order = self.get_dropoff_ordering()
 
         print("Dropoff ordering: ", order)
@@ -102,7 +103,8 @@ class OrderApproximator:
                     break
                 else:
                     result.append(node)
-                    curr_loc = node
+
+
         result.append("go_home")
         print(result)
         return self.get_path_dropoffs(result)
