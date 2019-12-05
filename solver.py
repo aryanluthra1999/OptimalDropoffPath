@@ -8,10 +8,11 @@ import search_agents as search
 import orderApproximators
 import SteinerApproxSolver
 import networkx as netx
-from output_validator.py import tests
+from output_validator import tests
 import time
 from student_utils import cost_of_solution
 from student_utils import *
+
 """
 ======================================================================
   Complete the following function.
@@ -43,7 +44,6 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     mapping = dict(zip(graph, list_of_locations))
     graph = netx.relabel_nodes(graph, mapping)
     #result = order_approx_agent.bootstrap_approx()
-    from student_utils import cost_of_solution
     #print(result)
 
     order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
@@ -120,7 +120,7 @@ def compareSolution(fileName,sol):
         return better
     else:
         output_file = utils.read_file(fileName[0:filename.index('.')+1]+'out')
-        if costs(input_file,output_file,[])<sol):
+        if costs(input_file,output_file,[])[0]<sol:
             better=True
         return better
 
