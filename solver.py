@@ -112,16 +112,14 @@ def solve_all(input_directory, output_directory, params=[]):
     for input_file in input_files:
         solve_from_file(input_file, output_directory, params=params)
 
-def compareSolution(fileName,sol):
-    better=False
+def compareSolution(fileName,sol,path,dropoff_mapping,list_locs):
     input_file =  utils.read_file(fileName)
     if path.exists(fileName[0:fileName.index('.')+1]+'out'):
-        return better
-    else:
         output_file = utils.read_file(fileName[0:filename.index('.')+1]+'out')
-        if costs(input_file,output_file,[])[0]<sol:
-            better=True
-        return better
+        if costs(input_file,output_file,[])>sol):
+            convertToFile(path, dropoff_mapping,fileName[0:filename.index('.')+1]+'out', list_locs)
+    else:
+        print('No previous solution.')
 
 
 """if __name__=="__main__":
