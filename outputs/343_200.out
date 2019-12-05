@@ -1,5 +1,5 @@
-Soda ClarkKerr HaasPavilion HearstFieldAnnex Hertz Insectary Koshland LeConte MemorialStadium Pimentel SatherGate CalvinLaboratory Bechtel1 Morgan Wellman Wurster Eshleman Evans Birge Blum GoldmanPlaza Soda Greenhouse Chou Campanile HearstGymnasium Soda Cleary BancroftLibrary Durant McEnerney Moffitt Mulford OBrien Sproul Stephens SutardjaDai TangCenter Warren WooHonFai Soda Zellerbach Boalt1 Bowles EdwardsStadium McCone NorthGate Pitzer Simon Stanley Bechtel Tan BarrowsHall CaliforniaHall Hesse Hilgard EastGate CalvinLaboratory IshiCourt Kleeberger Kroeber Lewis LowerSproul Minor WestGate Soda1 Giannini1 MLK1 WestGate1 CalvinLaboratory1 Cory1 Dwinelle1 Etcheverry1 GreekTheatre1 Haste1 HearstMiningCircle1 DoeLibrary HeatingPlant MemorialGlade Cheit1 LifeSciences1 McLaughlin1 KrutchTheater1 Observatory1 Stephens1 TangCenter1 Warren1 WooHonFai1 Zellerbach1 Soda
-82
+Soda ClarkKerr HaasPavilion HearstFieldAnnex Hertz Insectary Koshland LeConte MemorialStadium Morgan Wellman Bechtel Bowles DoeLibrary EdwardsStadium Simon CaliforniaHall Haviland HeatingPlant Hesse Hilgard Kleeberger Kroeber Lewis LowerSproul MemorialGlade Pimentel Bechtel WestGate Bechtel1 Cheit1 Giannini1 Jacobs1 Bechtel WestGate1 Wurster Eshleman Evans Birge Blum GoldmanPlaza Soda Greenhouse Chou Chvez Hargrove EastGate Campanile HearstGymnasium Soda Cleary McCone NorthGate Pitzer BarrowsHall FoxCottage IshiCourt SatherGate Soda1 BancroftLibrary Durant McEnerney Moffitt Mulford OBrien Sproul Stephens SutardjaDai TangCenter Warren WooHonFai Soda Zellerbach Boalt1 CalvinLaboratory1 Cory1 Dwinelle1 Minor Etcheverry1 GreekTheatre1 Haste1 HearstMiningCircle1 LifeSciences1 McLaughlin1 KrutchTheater1 Observatory1 Stephens1 TangCenter1 Warren1 WooHonFai1 Zellerbach1 Soda
+85
 ClarkKerr Gilman Foothill ClarkKerr
 HaasPavilion HaasPavilion
 HearstFieldAnnex HearstFieldAnnex
@@ -8,11 +8,30 @@ Insectary Insectary
 Koshland Koshland
 LeConte LeConte
 MemorialStadium MemorialStadium
-Pimentel Pimentel
-SatherGate SatherGate
-Bechtel1 Bechtel1
 Morgan Morgan
 Wellman Wellman
+Bechtel Bechtel
+Bowles Bowles
+DoeLibrary DoeLibrary
+EdwardsStadium EdwardsStadium
+Simon Tan Simon
+CaliforniaHall CaliforniaHall
+Haviland Haviland
+HeatingPlant HeatingPlant
+Hesse Hesse
+Hilgard Hilgard
+Kleeberger Kleeberger
+Kroeber Kroeber
+Lewis Lewis
+LowerSproul LowerSproul
+MemorialGlade MemorialGlade
+Pimentel Pimentel
+WestGate WestGate
+Bechtel1 Bechtel1
+Cheit1 Cheit1
+Giannini1 Giannini1
+Jacobs1 Jacobs1
+WestGate1 WestGate1
 Wurster Wurster
 Eshleman Eshleman
 Evans Evans
@@ -20,10 +39,21 @@ Birge Birge
 Blum Giauque BotanicalGarden Blum
 GoldmanPlaza GoldmanPlaza
 Greenhouse Greenhouse
-Chou Chvez Chou
+Chou Chou
+Chvez Chvez
+Hargrove Hargrove
+EastGate EastGate
 Campanile Campanile
 HearstGymnasium HearstGymnasium
-Cleary Davis Cleary
+Cleary Cleary
+McCone McCone
+NorthGate NorthGate
+Pitzer Stanley Pitzer
+BarrowsHall BarrowsHall
+FoxCottage FoxCottage
+IshiCourt IshiCourt
+SatherGate SatherGate
+Soda1 Davis MLK1 Soda1
 BancroftLibrary BancroftLibrary
 Durant Latimer Durant
 McEnerney McEnerney
@@ -38,41 +68,14 @@ Warren Warren
 WooHonFai WooHonFai
 Zellerbach Zellerbach
 Boalt1 Boalt1
-Bowles Bowles
-EdwardsStadium EdwardsStadium
-McCone McCone
-NorthGate NorthGate
-Pitzer Pitzer
-Simon Simon
-Stanley Stanley
-Tan Tan
-BarrowsHall FoxCottage BarrowsHall
-CaliforniaHall Haviland Hargrove CaliforniaHall
-Hesse Hesse
-Hilgard Hilgard
-EastGate EastGate
-IshiCourt IshiCourt
-Kleeberger Kleeberger
-Kroeber Kroeber
-Lewis Lewis
-LowerSproul LowerSproul
-Minor Minor
-WestGate WestGate
-Soda1 Soda1
-Giannini1 Jacobs1 Giannini1
-MLK1 MLK1
-WestGate1 WestGate1
 CalvinLaboratory1 CalvinLaboratory1
 Cory1 Cory1
 Dwinelle1 Dwinelle1
+Minor Minor
 Etcheverry1 Etcheverry1
 GreekTheatre1 GreekTheatre1
 Haste1 Haste1
-HearstMiningCircle1 Bechtel HearstMiningCircle1
-DoeLibrary DoeLibrary
-HeatingPlant HeatingPlant
-MemorialGlade MemorialGlade
-Cheit1 Cheit1
+HearstMiningCircle1 HearstMiningCircle1
 LifeSciences1 LifeSciences1
 McLaughlin1 McLaughlin1
 KrutchTheater1 Moses1 Hildebrand1 KrutchTheater1
