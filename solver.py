@@ -96,7 +96,7 @@ def convertToFile(path, dropoff_mapping, path_to_file, list_locs):
     utils.write_to_file(path_to_file, string)
 
 def solve_from_file(input_file, output_directory, params=[]):
-    print('Processing', input_file)
+    #print('Processing', input_file)
 
     input_data = utils.read_file(input_file)
     num_of_locations, num_houses, list_locations, list_houses, starting_car_location, adjacency_matrix = data_parser(input_data)
@@ -118,18 +118,25 @@ def solve_from_file(input_file, output_directory, params=[]):
 def solve_all(input_directory, output_directory, params=[]):
     input_files = utils.get_files_with_extension(input_directory, 'in')
 
+    print("50 Files")
     for input_file in tqdm(input_files):
         if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
             solve_from_file(input_file, output_directory, params=params)
+
+    print("100 Files")
+    for input_file in tqdm(input_files):
         if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
             solve_from_file(input_file, output_directory, params=params)
+
+    print("200 Files")
+    for input_file in tqdm(input_files):
         if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
             solve_from_file(input_file, output_directory, params=params)
 
 
 def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_directory):
     input_file =  utils.read_file(fileName)
-    print('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
+    #print('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
     if os.path.exists('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out'):
         output_file = utils.read_file('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
         if output_validator.tests(input_file,output_file,[])[0]>sol:
