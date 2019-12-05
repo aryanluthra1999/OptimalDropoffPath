@@ -8,10 +8,11 @@ import search_agents as search
 import orderApproximators
 import SteinerApproxSolver
 import networkx as netx
-from output_validator.py import tests
+from output_validator import tests
 import time
 from student_utils import cost_of_solution
 from student_utils import *
+
 """
 ======================================================================
   Complete the following function.
@@ -43,8 +44,14 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     mapping = dict(zip(graph, list_of_locations))
     graph = netx.relabel_nodes(graph, mapping)
     #result = order_approx_agent.bootstrap_approx()
-    from student_utils import cost_of_solution
     #print(result)
+
+    order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
+                                                              list_of_locations)
+
+    result = orderApproximators.bootstrap_approx(order_approx_agent)
+
+    print(cost_of_solution(graph, result[0], result[1]))
 
     steiner_approx_solver = SteinerApproxSolver.SteinerApproxSolver(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
     brr=steiner_approx_solver.solveSteinerTreeDTH()
@@ -114,7 +121,7 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs):
             convertToFile(path, dropoff_mapping,fileName[0:filename.index('.')+1]+'out', list_locs)
     else:
         print('No previous solution.')
-        
+
 
 """if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Parsing arguments')

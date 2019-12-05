@@ -2,13 +2,15 @@ import numpy as np
 import utils
 import networkx as netx
 import student_utils as util170
+from networkx.utils import pairwise
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import minimum_spanning_tree
-from networkx.algorithms.approximation.steinertree import steiner_tree
+from networkx.algorithms.approximation.steinertree import steiner_tree, metric_closure
 from networkx.algorithms.traversal.depth_first_search import dfs_preorder_nodes
 from pprint import pprint
 from multiprocessing import Process, Manager
 from itertools import chain, combinations
+import copy
 import time
 #import pdb
 from tqdm import tqdm
@@ -22,6 +24,8 @@ class OrderApproximator:
         self.distanceMemo = dict()
         self.start_loc = soda_loc
         self.homes = homes_arr
+
+
 
     def get_path_dropoffs(self, result):
         locs=[]
@@ -155,14 +159,16 @@ class OrderApproximator:
 
         return result
 
-    def bootstrap_approx(self):
-        best = float("inf")
-        for i in range(100):
-            time.sleep(3)
-            for i in tqdm(range(10)):
-                result = self.get_drop_path()
-                new = util170.cost_of_solution(self.graph,result[0],result[1])[0]
-                best = min(best, new)
-            print("Best: ", best)
 
-        return best
+
+def bootstrap_approx(order_aproxer):
+    curr_approxer = order_aproxer
+    best = float("inf")
+    for i in range(100):
+        result = curr_approxer.get_drop_path()
+        new = util170.cost_of_solution(curr_approxer.graph, result[0], result[1])[0]
+        best = min(best, new)
+        curr_approxer = copy.deepcopy(order_aproxer)
+        print(best)
+
+    return best
