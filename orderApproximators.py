@@ -50,7 +50,7 @@ class OrderApproximator:
                 locs.append(back_home[i])
 
         print(locs)
-        print("Dropoffs", dropoffs)
+        print("Drop-offs", dropoffs)
 
         return locs,dropoffs
 
@@ -107,6 +107,28 @@ class OrderApproximator:
         result.append(curr_loc)
         result.append("go_home")
 
+        result = self.postprocess(result)
+
         print(result)
         return self.get_path_dropoffs(result)
+
+    def postprocess(self, action_list):
+
+        dropoff_stack = utils.Stack()
+        result = []
+
+        for action in action_list:
+
+            if "drop off" in action:
+                dropoff_stack.push(action)
+
+            else:
+
+                result.append(action)
+
+                while not dropoff_stack.isEmpty():
+                    result.append(dropoff_stack.pop())
+
+
+        return result
 
