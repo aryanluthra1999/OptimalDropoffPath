@@ -39,11 +39,12 @@ class OrderApproximator:
 
     def get_drop_path(self):
 
-        result = []
         curr_loc = self.start_loc
+        result = [curr_loc]
 
         order = self.get_dropoff_ordering()
         order.append(self.start_loc)
+
 
         for i in range(len(order) - 1):
             home = order[i]
@@ -52,6 +53,7 @@ class OrderApproximator:
             shortest_path = netx.shortest_path(self.graph, source=curr_loc, target=home)
 
             for node in shortest_path:
+                curr_loc = node
 
                 cont_path_cost = 2/3*(netx.dijkstra_path_length(self.graph, source=curr_loc, target=home)
                                       + netx.dijkstra_path_length(self.graph, source=home, target=next_home))
@@ -59,11 +61,11 @@ class OrderApproximator:
                 drop_path_cost = (netx.dijkstra_path_length(self.graph, source=curr_loc, target=home)
                                   + 2/3*(netx.dijkstra_path_length(self.graph, source=curr_loc, target=next_home)))
 
-                if drop_path_cost <= cont_path_cost:
+                if drop_path_cost < cont_path_cost:
                     result.append("drop off " + str(home))
                     break
                 else:
-                    result.append(node)
+                    result.append(curr_loc)
                     curr_loc = node
 
         print(result)

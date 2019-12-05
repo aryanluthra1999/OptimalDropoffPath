@@ -39,9 +39,6 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
 
 
 
-
-
-
 def runSolver(inputFile):
     input_data = utils.read_file(inputFile)
     params=[]
