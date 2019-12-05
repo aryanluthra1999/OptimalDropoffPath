@@ -48,8 +48,7 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
 
     order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
                                                               list_of_locations)
-
-    result = orderApproximators.bootstrap_approx(order_approx_agent)
+    result = order_approx_agent.get_drop_path()
 
     print(cost_of_solution(graph, result[0], result[1]))
 
