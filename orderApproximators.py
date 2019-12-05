@@ -61,12 +61,14 @@ class OrderApproximator:
                 drop_path_cost = (netx.dijkstra_path_length(self.graph, source=curr_loc, target=home)
                                   + 2/3*(netx.dijkstra_path_length(self.graph, source=curr_loc, target=next_home)))
 
-                if drop_path_cost < cont_path_cost:
+                if drop_path_cost <= cont_path_cost:
                     result.append("drop off " + str(home))
                     break
                 else:
                     result.append(curr_loc)
-                    curr_loc = node
+
+
+        result.append("go_home")
 
         print(result)
         return result
