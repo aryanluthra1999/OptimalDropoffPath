@@ -44,9 +44,10 @@ class OrderApproximator:
 
         order = self.get_dropoff_ordering()
         order.append(self.start_loc)
-
+        
         print(order)
 
+        result.append(self.start_loc)
 
         for i in range(len(order) - 1):
             home = order[i]
@@ -67,12 +68,50 @@ class OrderApproximator:
                     result.append("drop off " + str(home))
                     break
                 else:
-                    result.append(curr_loc)
-
-
+                    result.append(node)
+                    curr_loc = node
         result.append("go_home")
+        locs=[]
+        dropoffs=dict()
+        curr=''
+        for i in range(len(result)):
+            if curr=='':
+                curr=result[i]
+                locs.append(curr)
+            elif result[i]==curr:
+                continue
+            elif len(result[i])>8 and result[i][0:8]=='drop off':
+                if curr not in dropoffs.keys():
+                    dropoffs[curr]=[result[i][9:]]
+                else:
+                    dropoffs[curr]=dropoffs[curr]+[result[i][9:]]
+            elif len(result[i])==7 and result[i]=='go_home':
+                break
+            else:
+                curr=result[i]
+                locs.append(curr)
 
-        print(result)
-        return result
-
-
+            """if i!=0 and result[i-1][0:8]=='drop off':
+                continue
+            else:
+                if(len(result[i])==7 and result[i]=='go_home'):
+                    break
+                if (len(result[i])<8):
+                    curr=result[i]
+                    locs+=[curr]
+                if len(result[i])>8 and result[i][0:8]=='drop off':
+                    if curr not in dropoffs.keys():
+                        dropoffs[curr]=[result[i][9:]]
+                    else:
+                        dropoffs[curr]=dropoffs[curr]+[result[i][9:]]
+                else:
+                    curr=result[i]
+                    locs+=[curr]"""
+        back_home=netx.shortest_path(self.graph,locs[len(locs)-1],locs[0])
+        print(back_home)
+        for i in range(len(back_home)):
+            if i==0:
+                continue
+            else:
+                locs.append(back_home[i])
+        return locs,dropoffs
