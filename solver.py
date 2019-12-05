@@ -139,8 +139,9 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_director
     #print('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
     if os.path.exists('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out'):
         output_file = utils.read_file('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
-        if output_validator.tests(input_file,output_file,[])[0]>sol:
-            print("better solution found")
+        file_cost = output_validator.tests(input_file,output_file,[])[0]
+        if file_cost>sol:
+            print("better solution found by ", 1 - (file_cost- sol)/file_cost)
             output_file = utils.input_to_output(fileName, output_directory)
             convertToFile(convert_locations_to_indices(path,list_locs), dropoff_mapping, output_file, list_locs)
 
