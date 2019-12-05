@@ -48,8 +48,10 @@ class OrderApproximator:
                 continue
             else:
                 locs.append(back_home[i])
+
         print(locs)
         print("Dropoffs", dropoffs)
+
         return locs,dropoffs
 
     def get_steiner_tree(self):
@@ -81,8 +83,6 @@ class OrderApproximator:
 
         order.append(self.start_loc)
 
-        result.append(self.start_loc)
-
         for i in range(len(order) - 1):
             home = order[i]
             next_home = order[i+1]
@@ -104,8 +104,9 @@ class OrderApproximator:
                 else:
                     result.append(node)
 
-
+        result.append(curr_loc)
         result.append("go_home")
+
         print(result)
         return self.get_path_dropoffs(result)
 
