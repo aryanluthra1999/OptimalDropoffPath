@@ -114,4 +114,6 @@ class OrderApproximator:
                 continue
             else:
                 locs.append(back_home[i])
+        print(locs)
+        print(dropoffs)
         return locs,dropoffs

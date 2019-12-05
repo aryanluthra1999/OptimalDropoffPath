@@ -8,6 +8,7 @@ import networkx as nx
 import numpy as np
 from student_utils import *
 
+
 # Change these if you want to allow files with different names and/or graph sizes
 RANGE_OF_INPUT_SIZES = [50, 100, 200]
 VALID_FILENAMES = ['50.in', '100.in', '200.in']
