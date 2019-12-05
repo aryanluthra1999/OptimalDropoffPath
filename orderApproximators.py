@@ -41,14 +41,14 @@ class OrderApproximator:
                 curr=result[i]
                 locs.append(curr)
         back_home=netx.shortest_path(self.graph,locs[len(locs)-1],locs[0])
-        print(back_home)
+        #print(back_home)
         for i in range(len(back_home)):
             if i==0:
                 continue
             else:
                 locs.append(back_home[i])
         print(locs)
-        print(dropoffs)
+        print("Dropoffs", dropoffs)
         return locs,dropoffs
 
     def get_steiner_tree(self):
@@ -75,9 +75,10 @@ class OrderApproximator:
         result = [curr_loc]
 
         order = self.get_dropoff_ordering()
+
+        print("Dropoff ordering: ", order)
+
         order.append(self.start_loc)
-        
-        print(order)
 
         result.append(self.start_loc)
 
@@ -103,5 +104,6 @@ class OrderApproximator:
                     result.append(node)
                     curr_loc = node
         result.append("go_home")
+        print(result)
         return self.get_path_dropoffs(result)
 
