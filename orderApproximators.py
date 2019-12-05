@@ -72,8 +72,3 @@ class OrderApproximator:
         return result
 
 
-
-
-
-
-
