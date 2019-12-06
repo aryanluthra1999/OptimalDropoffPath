@@ -158,6 +158,8 @@ class SearchAgent():
         self.graph = netx.relabel_nodes(self.graph, mapping)
         self.distanceMemo = dict()
         self.steinerMemo = dict()
+        self.homes=homes_arr
+        self.locations=locs
 
 
         # manager = Manager()
@@ -324,3 +326,39 @@ class SearchAgent():
         print("cost: ", goal[0].cost_so_far)
 
         return goal[0].path
+
+    def get_path_dropoffs(self,path):
+        traversal=[]
+        dropoffs=dict()
+        loc=''
+        closestHomes=dict()
+        currentHome=0
+        for i in range(len(path)):
+            loc=path[i]
+            if loc=='go_home':
+                break
+            if loc!='drop':
+                currentHome=0
+                closestHomes=dict()
+                traversal.append(loc)
+                for home in self.homes:
+                    closestHomes[home]=netx.dijkstra_path_length(self.graph,loc,home)
+            else:
+                sortedDict=sorted(closestHomes.items(), key=lambda x: x[1])
+                if currentHome==0:
+                    dropoffs[loc]=[sortedDict[currentHome]]
+                    currentHome+=1
+                else:
+                    home_to_choose=''
+                    possibleHomes=list(sortedDict.keys())
+                    for i in range(currentHome+1):
+                        home_to_choose=possibleHomes[i]
+                    dropoffs[loc]+=[sortedDict[home_to_choose]]
+                    currentHome+=1
+        back_home=netx.shortest_path(self.graph,traversal[len(traversal)-1],locs[0])
+        for i in range(len(back_home)):
+            if i==0:
+                continue
+            else:
+                traversal.append(back_home[i])
+        return traversal,dropoffs
