@@ -206,7 +206,7 @@ class OrderApproximator:
         return self.get_path_dropoffs(result)
 
 
-    def steiner_aneal(self, iterations = 5000, tree_func = get_dropoff_ordering_steiner, epsilon = 0):
+    def steiner_aneal(self, iterations = 100, tree_func = get_dropoff_ordering_steiner, epsilon = 0):
 
         curr_order = tree_func(self)
         curr_result = self.get_drop_path_with_order(curr_order)
@@ -246,9 +246,9 @@ class OrderApproximator:
             arr[index_2] = arr[index_1]
             arr[index_1] = temp
             return arr
-        
 
-    def mst_aneal(self, iterations=5000, tree_func=get_dropoff_ordering_mst, epsilon = 0.7):
+
+    def mst_aneal(self, iterations=100, tree_func=get_dropoff_ordering_mst, epsilon = 0.7):
         curr_order = tree_func(self)
         curr_result = self.get_drop_path_with_order(curr_order)
         curr_min = cost_of_solution(self.graph, curr_result[0], curr_result[1])

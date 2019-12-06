@@ -63,7 +63,7 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     steiner_approx_solver_order = cost_of_solution(graph,brr[0],brr[1])
     print(steiner_approx_solver_order)"""
 
-    print(result+[cost_of_solution(graph,result[0],result[1])[0]])
+    return result+[cost_of_solution(graph,result[0],result[1])[0]]
 
 def runSolver(inputFile):
     input_data = utils.read_file(inputFile)
