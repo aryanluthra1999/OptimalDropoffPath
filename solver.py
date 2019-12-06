@@ -15,6 +15,8 @@ from student_utils import cost_of_solution
 from student_utils import convert_locations_to_indices
 from student_utils import *
 from tqdm import tqdm
+import multiprocessing
+import signal
 
 
 """
@@ -51,7 +53,7 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
                                                               list_of_locations)
     result = order_approx_agent.steiner_aneal()
-    print("Steiner MST approx", cost_of_solution(graph, result[0], result[1]))
+    # print("Steiner MST approx", cost_of_solution(graph, result[0], result[1]))
 
     # nn_agent = nearest_neighbors.NearestNeighbors(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
     # result = nn_agent.get_dropoff_ordering_ns()
@@ -100,7 +102,7 @@ def convertToFile(path, dropoff_mapping, path_to_file, list_locs):
     utils.write_to_file(path_to_file, string)
 
 def solve_from_file(input_file, output_directory, params=[]):
-    #print('Processing', input_file)
+    print('Processing', input_file)
 
     input_data = utils.read_file(input_file)
     num_of_locations, num_houses, list_locations, list_houses, starting_car_location, adjacency_matrix = data_parser(input_data)
@@ -111,6 +113,7 @@ def solve_from_file(input_file, output_directory, params=[]):
     for i in range(len(old_keys)):
         new_dict[new_keys[i]] = convert_locations_to_indices(result[1][old_keys[i]],list_locations)
     compareSolution(input_file,result[2],result[0],new_dict,list_locations,output_directory)
+    print("Finished processing: ", input_file)
 
     """basename, filename = os.path.split(input_file)
     if not os.path.exists(output_directory):
@@ -120,13 +123,36 @@ def solve_from_file(input_file, output_directory, params=[]):
     convertToFile(car_path, drop_offs, output_file, list_locations)"""
 
 
+def solve_from_file_wrapper(param_list):
+    return solve_from_file(param_list[0],param_list[1], param_list[2])
+
+
 def solve_all(input_directory, output_directory, params=[]):
     input_files = utils.get_files_with_extension(input_directory, 'in')
+    print("Started with the inputs: ")
+    pool = multiprocessing.Pool()
+    param_list = []
+    for input_file in tqdm(input_files):
+        if input_file[input_file.index('_'):input_file.index('_') + 3] == '_50':
+            param_list.append([input_file, output_directory, params])
 
-    print("50 Files")
-    for input_file in (input_files):
-        if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
-            solve_from_file(input_file, output_directory, params=params)
+    for input_file in tqdm(input_files):
+        if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
+            param_list.append([input_file, output_directory, params])
+
+    for input_file in tqdm(input_files):
+        if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
+            param_list.append([input_file, output_directory, params])
+
+    pool.map(solve_from_file_wrapper, param_list)
+    pool.close()
+    print("ENDING all the inputs.")
+
+
+    # print("50 Files")
+    # for input_file in (input_files):
+    #     if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
+    #         solve_from_file(input_file, output_directory, params=params)
 
     # print("100 Files")
     # for input_file in (input_files):
@@ -137,6 +163,7 @@ def solve_all(input_directory, output_directory, params=[]):
     # for input_file in tqdm(input_files):
     #     if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
     #         solve_from_file(input_file, output_directory, params=params)
+    #solve_from_file(input_file, output_directory, params=params)
 
 
 def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_directory):
@@ -146,7 +173,7 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_director
         output_file = utils.read_file('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
         file_cost = output_validator.tests(input_file,output_file,[])
         file_cost, meg = file_cost[0], file_cost[1]
-        print(meg)
+        print(fileName, ": ", meg)
         if file_cost>sol:
             print("better solution found by ", 100*(file_cost- sol)/file_cost, "%")
             output_file = utils.input_to_output(fileName, output_directory)
