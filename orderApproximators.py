@@ -12,6 +12,9 @@ from multiprocessing import Process, Manager
 from itertools import chain, combinations
 import copy
 import time
+import random
+from student_utils import cost_of_solution
+
 #import pdb
 from tqdm import tqdm
 
@@ -203,12 +206,65 @@ class OrderApproximator:
         return self.get_path_dropoffs(result)
 
 
-    def steiner_aneal(self, iterations = 1000, tree_func = get_dropoff_ordering_steiner):
+    def steiner_aneal(self, iterations = 5000, tree_func = get_dropoff_ordering_steiner, epsilon = 0):
 
         curr_order = tree_func(self)
+        curr_result = self.get_drop_path_with_order(curr_order)
+        curr_min = cost_of_solution(self.graph, curr_result[0], curr_result[1])
+        print("initial cost ", curr_min)
+
+        for i in tqdm(range(iterations)):
+
+            e_prob = epsilon/max(1, i/10)
 
 
-    def mutate_order(self, arr):
+            new_order = self.mutate_order(curr_order)
+            new_result = self.get_drop_path_with_order(new_order)
+            new_cost = cost_of_solution(self.graph, new_result[0], new_result[1])
+
+            if new_cost < curr_min or random.random() < e_prob:
+                curr_order = new_order
+                curr_result = new_result
+                curr_min = new_cost
 
 
-    def mst_aneal(self, iterations=1000, tree_func=get_dropoff_ordering_mst):
+        return curr_result
+
+    def mutate_order(self, order):
+
+        arr = order.copy()
+
+        if len(arr) <=1:
+            return arr
+        elif len(arr) == 2:
+            return [arr[1], arr[0]]
+        else:
+            index_1 = int(random.random()*len(arr))
+            index_2 = int(random.random()*len(arr))
+
+            temp = arr[index_2]
+            arr[index_2] = arr[index_1]
+            arr[index_1] = temp
+            return arr
+        
+
+    def mst_aneal(self, iterations=5000, tree_func=get_dropoff_ordering_mst, epsilon = 0.7):
+        curr_order = tree_func(self)
+        curr_result = self.get_drop_path_with_order(curr_order)
+        curr_min = cost_of_solution(self.graph, curr_result[0], curr_result[1])
+        print("initial cost ", curr_min)
+
+        for i in tqdm(range(iterations)):
+
+            e_prob = epsilon / max(1, i / 10)
+
+            new_order = self.mutate_order(curr_order)
+            new_result = self.get_drop_path_with_order(new_order)
+            new_cost = cost_of_solution(self.graph, new_result[0], new_result[1])
+
+            if new_cost < curr_min or random.random() < e_prob:
+                curr_order = new_order
+                curr_result = new_result
+                curr_min = new_cost
+
+        return curr_result
