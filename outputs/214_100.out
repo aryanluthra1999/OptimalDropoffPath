@@ -1,26 +1,30 @@
-zero two three ten eleven twelve thirteen twenty twentyone fifteen twentytwo twentythree twentyfour twentythree twentytwo twentynine thirty thirtyseven fortyfour fortyfive fortysix fortyseven fortyeight fiftyfive fiftysix fifty fiftysix fiftyfive sixtytwo sixtyone sixtyeight sixtyseven sixtysix sixtyfive sixtyfour seventy seventyseven eightyfour seventyeight seventynine eighty eightyone eightyeight eightyone seventyfour sixtyseven sixty fiftynine fiftyeight fiftyseven fifty fortythree thirtysix twentynine thirtyfive thirtyfour thirtythree twentysix nineteen twelve five six zero
-37
+zero two three ten eleven twelve thirteen fourteen eight fifteen twentyone twenty nineteen eighteen twentyfive twentyfour twentythree twentytwo twentynine thirtyfive thirtyfour thirtythree thirtytwo thirtynine thirtyeight thirtyseven fortyfour fortyfive fortysix fortyseven fortyeight fortynine fortythree fifty fiftyseven sixtythree sixtytwo sixtyone sixty sixtyseven sixtysix sixtyfive sixtyfour seventy seventyseven eightyfour seventyeight seventynine eighty eightyone eightyeight eightynine eightytwo seventyfive sixtyeight sixtyone fiftyfour fortyseven forty thirtythree twentysix nineteen twelve five four zero
+41
 two two
 three three
 ten ten
 twelve twelve
-thirteen fourteen
-twenty twenty
+fourteen fourteen
 fifteen fifteen
+twenty twenty
+twentyfive twentyfive
+twentyfour twentyfour
 twentytwo twentytwo
-twentyfour twentyfive twentyfour
-twentynine twentynine
-thirty thirty
-thirtyseven thirtynine thirtysix thirtyseven
+twentynine thirty twentynine
+thirtyfive thirtyfive
+thirtyfour thirtyfour
+thirtythree thirtythree
+thirtynine thirtynine
+thirtyseven thirtysix thirtyseven
 fortyfour fortyfour
 fortyfive fortyfive
 fortyseven fortyseven
 fortyeight fortyeight
-fiftyfive fiftythree fiftyfive
 fifty fiftyone fifty
+fiftyseven fiftyseven
 sixtytwo sixtytwo
-sixtyone sixty sixtyone
-sixtyeight sixtyeight
+sixtyone sixtyone
+sixty sixty
 sixtyseven sixtyseven
 sixtysix sixtysix
 sixtyfive sixtyfive
@@ -29,11 +33,11 @@ seventyseven seventyfive seventyone seventyseven
 eightyfour eightyfour
 seventyeight seventyeight
 seventynine seventynine
-eightyone eightytwo eightyone
-eightyeight ninetyfive eightynine eightyseven eightyeight
-fiftyseven fiftyseven
-thirtyfive thirtyfive
-thirtyfour thirtyfour
-thirtythree thirtythree
-five five four
-six six
+eightyone eightyone
+eightyeight eightyseven eightyeight ninetyfive
+eightynine eightynine
+eightytwo eightytwo
+sixtyeight sixtyeight
+fiftyfour fiftythree fiftyfive
+five six five
+four four

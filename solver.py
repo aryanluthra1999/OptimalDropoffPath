@@ -199,7 +199,6 @@ if __name__=="__main__":
         input_file = args.input
         solve_from_file(input_file, output_directory, params=args.params)
 
-#
 # if __name__ == "__main__":
-#     fname = "inputs/25_50.in"
+#     fname = "inputs/25_200.in"
 #     runSolver(fname)
