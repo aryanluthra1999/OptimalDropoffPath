@@ -213,7 +213,7 @@ class OrderApproximator:
         curr_order = tree_func(self)
         curr_result = self.get_drop_path_with_order(curr_order)
         curr_min = cost_of_solution(self.graph, curr_result[0], curr_result[1])
-        print("initial cost ", curr_min)
+        # print("initial cost ", curr_min)
 
         for i in tqdm(range(iterations)):
 
@@ -224,7 +224,7 @@ class OrderApproximator:
             new_result = self.get_drop_path_with_order(new_order)
             new_cost = cost_of_solution(self.graph, new_result[0], new_result[1])
 
-            print(new_order)
+            # print(new_order)
 
             if new_cost < curr_min or random.random() < e_prob:
                 curr_order = new_order
@@ -237,7 +237,7 @@ class OrderApproximator:
     def mutate_order(self, order):
 
         arr = copy.deepcopy(order)
-        print("After deep copy :", len(arr))
+        # print("After deep copy :", len(arr))
 
         if len(arr) <=1:
             return arr
@@ -245,7 +245,7 @@ class OrderApproximator:
             pos1 = int(random.random()*len(arr))
             pos2 = int(random.random()*len(arr))
             arr[pos1], arr[pos2] = arr[pos2], arr[pos1]
-            print("In else block: ", len(arr))
+            # print("In else block: ", len(arr))
             return arr
 
 
@@ -253,7 +253,7 @@ class OrderApproximator:
         curr_order = tree_func(self)
         curr_result = self.get_drop_path_with_order(curr_order)
         curr_min = cost_of_solution(self.graph, curr_result[0], curr_result[1])
-        print("initial cost ", curr_min)
+        # print("initial cost ", curr_min)
 
         for i in tqdm(range(iterations)):
 

@@ -128,10 +128,10 @@ def solve_all(input_directory, output_directory, params=[]):
         if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
             solve_from_file(input_file, output_directory, params=params)
 
-    print("100 Files")
-    for input_file in (input_files):
-        if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
-            solve_from_file(input_file, output_directory, params=params)
+    # print("100 Files")
+    # for input_file in (input_files):
+    #     if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
+    #         solve_from_file(input_file, output_directory, params=params)
 
     # print("200 Files")
     # for input_file in tqdm(input_files):
@@ -144,7 +144,9 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_director
     #print('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
     if os.path.exists('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out'):
         output_file = utils.read_file('outputs/'+fileName[fileName.index('/')+1:fileName.index('.')+1]+'out')
-        file_cost = output_validator.tests(input_file,output_file,[])[0]
+        file_cost = output_validator.tests(input_file,output_file,[])
+        file_cost, meg = file_cost[0], file_cost[1]
+        print(meg)
         if file_cost>sol:
             print("better solution found by ", 100*(file_cost- sol)/file_cost, "%")
             output_file = utils.input_to_output(fileName, output_directory)
@@ -155,22 +157,22 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_director
         output_file = utils.input_to_output(fileName, output_directory)
         convertToFile(convert_locations_to_indices(path,list_locs), dropoff_mapping, output_file, list_locs)
 
-# if __name__=="__main__":
-#     parser = argparse.ArgumentParser(description='Parsing arguments')
-#     parser.add_argument('--all', action='store_true', help='If specified, the solver is run on all files in the input directory. Else, it is run on just the given input file')
-#     parser.add_argument('input', type=str, help='The path to the input file or directory')
-#     parser.add_argument('output_directory', type=str, nargs='?', default='.', help='The path to the directory where the output should be written')
-#     parser.add_argument('params', nargs=argparse.REMAINDER, help='Extra arguments passed in')
-#     args = parser.parse_args()
-#     output_directory = args.output_directory
-#     if args.all:
-#         input_directory = args.input
-#         solve_all(input_directory, output_directory, params=args.params)
-#     else:
-#         input_file = args.input
-#         solve_from_file(input_file, output_directory, params=args.params)
+if __name__=="__main__":
+    parser = argparse.ArgumentParser(description='Parsing arguments')
+    parser.add_argument('--all', action='store_true', help='If specified, the solver is run on all files in the input directory. Else, it is run on just the given input file')
+    parser.add_argument('input', type=str, help='The path to the input file or directory')
+    parser.add_argument('output_directory', type=str, nargs='?', default='.', help='The path to the directory where the output should be written')
+    parser.add_argument('params', nargs=argparse.REMAINDER, help='Extra arguments passed in')
+    args = parser.parse_args()
+    output_directory = args.output_directory
+    if args.all:
+        input_directory = args.input
+        solve_all(input_directory, output_directory, params=args.params)
+    else:
+        input_file = args.input
+        solve_from_file(input_file, output_directory, params=args.params)
 
-
-if __name__ == "__main__":
-    fname = "inputs/25_50.in"
-    runSolver(fname)
+#
+# if __name__ == "__main__":
+#     fname = "inputs/25_50.in"
+#     runSolver(fname)
