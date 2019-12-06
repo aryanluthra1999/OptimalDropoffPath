@@ -275,7 +275,6 @@ class SearchAgent():
             result = steiner_tree(self.graph, homes_to_visit, weight='weight').size(weight='weight')
             self.steinerMemo[k] = result
 
-        result = self.steinerMemo[k]
         result += state.get_dropoff_cost_and_loc(self.graph)[0]
 
         return 2/3*result

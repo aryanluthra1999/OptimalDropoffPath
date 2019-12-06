@@ -54,6 +54,7 @@ class NearestNeighbors:
                 locs.append(back_home[i])
         return [locs,dropoffs]
 
+
     def get_dropoff_ordering_ns(self):
         homes_visited=[False for i in self.homes]
         loc=self.start_loc

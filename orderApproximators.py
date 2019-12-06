@@ -163,14 +163,52 @@ class OrderApproximator:
 
 
 
-def bootstrap_approx(order_aproxer):
-    curr_approxer = order_aproxer
-    best = float("inf")
-    for i in range(100):
-        result = curr_approxer.get_drop_path()
-        new = util170.cost_of_solution(curr_approxer.graph, result[0], result[1])[0]
-        best = min(best, new)
-        curr_approxer = copy.deepcopy(order_aproxer)
-        print(best)
+    def get_drop_path_with_order(self, order):
 
-    return best
+        curr_loc = self.start_loc
+        result = [curr_loc]
+        #pdb.set_trace()
+
+        #print("Dropoff ordering: ", order)
+
+        order.append(self.start_loc)
+
+        for i in range(len(order) - 1):
+            home = order[i]
+            next_home = order[i+1]
+
+            shortest_path = netx.shortest_path(self.graph, source=curr_loc, target=home)
+
+            for node in shortest_path:
+                curr_loc = node
+
+                cont_path_cost = 2/3*(netx.dijkstra_path_length(self.graph, source=curr_loc, target=home)
+                                      + netx.dijkstra_path_length(self.graph, source=home, target=next_home))
+
+                drop_path_cost = (netx.dijkstra_path_length(self.graph, source=curr_loc, target=home)
+                                  + 2/3*(netx.dijkstra_path_length(self.graph, source=curr_loc, target=next_home)))
+
+                if drop_path_cost <= cont_path_cost:
+                    result.append("drop off " + str(home))
+                    break
+                else:
+                    result.append(node)
+
+        result.append(curr_loc)
+        result.append("go_home")
+
+        result = self.postprocess(result)
+
+        #print(result)
+        return self.get_path_dropoffs(result)
+
+
+    def steiner_aneal(self, iterations = 1000, tree_func = get_dropoff_ordering_steiner):
+
+        curr_order = steiner_
+
+        curr_result =
+
+
+    def mst_aneal(self, iterations=1000, tree_func=get_dropoff_ordering_steiner):
+

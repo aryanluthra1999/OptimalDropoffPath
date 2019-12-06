@@ -36,29 +36,29 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
         A dictionary mapping drop-off location to a list of homes of TAs that got off at that particular location
         NOTE: both outputs should be in terms of indices not the names of the locations themselves
     """
-    # list_of_locations=[str(i) for i in list_of_locations]
-    #
-    # searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location,list_of_locations)
-    #
-    # result = searchAgent.astar()
-
-    #order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
 
     graph = adjacency_matrix_to_graph(adjacency_matrix)[0]  ## maybe we want a graph object from network x instead
     mapping = dict(zip(graph, list_of_locations))
     graph = netx.relabel_nodes(graph, mapping)
-    #result = order_approx_agent.bootstrap_approx()
-    #print(result)
+
+    list_of_locations=[str(i) for i in list_of_locations]
+
+    searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location,list_of_locations)
+
+    result = searchAgent.astar()
+
+    #order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
+
 
     # order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
     #                                                           list_of_locations)
     # result = order_approx_agent.get_drop_path()
     # print("Steiner MST approx", cost_of_solution(graph, result[0], result[1]))
 
-    nn_agent = nearest_neighbors.NearestNeighbors(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
-    result = nn_agent.get_dropoff_ordering_ns()
+    # nn_agent = nearest_neighbors.NearestNeighbors(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
+    # result = nn_agent.get_dropoff_ordering_ns()
 
-    # print("Nearest neighbour3 approx", cost_of_solution(graph, result[0], result[1]))
+    print("Nearest neighbour3 approx", cost_of_solution(graph, result[0], result[1]))
 
     """steiner_approx_solver = SteinerApproxSolver.SteinerApproxSolver(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
     brr=steiner_approx_solver.solveSteinerTreeDTH()
@@ -125,20 +125,20 @@ def solve_from_file(input_file, output_directory, params=[]):
 def solve_all(input_directory, output_directory, params=[]):
     input_files = utils.get_files_with_extension(input_directory, 'in')
 
-    # print("50 Files")
-    # for input_file in tqdm(input_files):
-    #     if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
-    #         solve_from_file(input_file, output_directory, params=params)
-    #
-    # print("100 Files")
-    # for input_file in tqdm(input_files):
-    #     if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
-    #         solve_from_file(input_file, output_directory, params=params)
-
-    print("200 Files")
+    print("50 Files")
     for input_file in tqdm(input_files):
-        if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
+        if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
             solve_from_file(input_file, output_directory, params=params)
+
+    print("100 Files")
+    for input_file in tqdm(input_files):
+        if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
+            solve_from_file(input_file, output_directory, params=params)
+
+    # print("200 Files")
+    # for input_file in tqdm(input_files):
+    #     if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
+    #         solve_from_file(input_file, output_directory, params=params)
 
 
 def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_directory):
@@ -157,22 +157,22 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_director
         output_file = utils.input_to_output(fileName, output_directory)
         convertToFile(convert_locations_to_indices(path,list_locs), dropoff_mapping, output_file, list_locs)
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser(description='Parsing arguments')
-    parser.add_argument('--all', action='store_true', help='If specified, the solver is run on all files in the input directory. Else, it is run on just the given input file')
-    parser.add_argument('input', type=str, help='The path to the input file or directory')
-    parser.add_argument('output_directory', type=str, nargs='?', default='.', help='The path to the directory where the output should be written')
-    parser.add_argument('params', nargs=argparse.REMAINDER, help='Extra arguments passed in')
-    args = parser.parse_args()
-    output_directory = args.output_directory
-    if args.all:
-        input_directory = args.input
-        solve_all(input_directory, output_directory, params=args.params)
-    else:
-        input_file = args.input
-        solve_from_file(input_file, output_directory, params=args.params)
+# if __name__=="__main__":
+#     parser = argparse.ArgumentParser(description='Parsing arguments')
+#     parser.add_argument('--all', action='store_true', help='If specified, the solver is run on all files in the input directory. Else, it is run on just the given input file')
+#     parser.add_argument('input', type=str, help='The path to the input file or directory')
+#     parser.add_argument('output_directory', type=str, nargs='?', default='.', help='The path to the directory where the output should be written')
+#     parser.add_argument('params', nargs=argparse.REMAINDER, help='Extra arguments passed in')
+#     args = parser.parse_args()
+#     output_directory = args.output_directory
+#     if args.all:
+#         input_directory = args.input
+#         solve_all(input_directory, output_directory, params=args.params)
+#     else:
+#         input_file = args.input
+#         solve_from_file(input_file, output_directory, params=args.params)
+#
 
-
-# if __name__ == "__main__":
-#     fname = "inputs/7_50.in"
-#     runSolver(fname)
+if __name__ == "__main__":
+    fname = "inputs/67_50.in"
+    runSolver(fname)
