@@ -7,6 +7,7 @@ import utils
 import search_agents as search
 import orderApproximators
 import SteinerApproxSolver
+import nearest_neighbors
 import networkx as netx
 import output_validator
 import time
@@ -49,10 +50,15 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     #result = order_approx_agent.bootstrap_approx()
     #print(result)
 
-    order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
-                                                              list_of_locations)
-    result = order_approx_agent.get_drop_path()
-    #print(cost_of_solution(graph, result[0], result[1]))
+    # order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
+    #                                                           list_of_locations)
+    # result = order_approx_agent.get_drop_path()
+    # print("Steiner MST approx", cost_of_solution(graph, result[0], result[1]))
+
+    nn_agent = nearest_neighbors.NearestNeighbors(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
+    result = nn_agent.get_dropoff_ordering_ns()
+
+    # print("Nearest neighbour3 approx", cost_of_solution(graph, result[0], result[1]))
 
     """steiner_approx_solver = SteinerApproxSolver.SteinerApproxSolver(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
     brr=steiner_approx_solver.solveSteinerTreeDTH()
@@ -107,6 +113,7 @@ def solve_from_file(input_file, output_directory, params=[]):
     for i in range(len(old_keys)):
         new_dict[new_keys[i]] = convert_locations_to_indices(result[1][old_keys[i]],list_locations)
     compareSolution(input_file,result[2],result[0],new_dict,list_locations,output_directory)
+
     """basename, filename = os.path.split(input_file)
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
@@ -118,20 +125,20 @@ def solve_from_file(input_file, output_directory, params=[]):
 def solve_all(input_directory, output_directory, params=[]):
     input_files = utils.get_files_with_extension(input_directory, 'in')
 
-    print("50 Files")
-    for input_file in tqdm(input_files):
-        if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
-            solve_from_file(input_file, output_directory, params=params)
-
-    print("100 Files")
-    for input_file in tqdm(input_files):
-        if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
-            solve_from_file(input_file, output_directory, params=params)
-
-    # print("200 Files")
+    # print("50 Files")
     # for input_file in tqdm(input_files):
-    #     if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
+    #     if input_file[input_file.index('_'):input_file.index('_')+3]=='_50':
     #         solve_from_file(input_file, output_directory, params=params)
+    #
+    # print("100 Files")
+    # for input_file in tqdm(input_files):
+    #     if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
+    #         solve_from_file(input_file, output_directory, params=params)
+
+    print("200 Files")
+    for input_file in tqdm(input_files):
+        if input_file[input_file.index('_'):input_file.index('_')+4]=='_200':
+            solve_from_file(input_file, output_directory, params=params)
 
 
 def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_directory):
@@ -166,6 +173,6 @@ if __name__=="__main__":
         solve_from_file(input_file, output_directory, params=args.params)
 
 
-"""if __name__ == "__main__":
-    fname = "inputs/7_50.in"
-    runSolver(fname)"""
+# if __name__ == "__main__":
+#     fname = "inputs/7_50.in"
+#     runSolver(fname)

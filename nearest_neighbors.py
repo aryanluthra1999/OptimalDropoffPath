@@ -24,6 +24,7 @@ class NearestNeighbors:
         self.distanceMemo = dict()
         self.start_loc = soda_loc
         self.homes = homes_arr
+
     def get_path_dropoffs(self, result):
         locs=[]
         dropoffs=dict()
@@ -63,8 +64,8 @@ class NearestNeighbors:
             for i in range(len(self.homes)):
                 if homes_visited[i]==False:
                     index_dict[self.homes[i]]=i
-                    print(self.homes[i])
-                    print(netx.dijkstra_path_length(self.graph, source=loc, target=self.homes[i]),'\n')
+                    #print(self.homes[i])
+                    #print(netx.dijkstra_path_length(self.graph, source=loc, target=self.homes[i]),'\n')
                     home_dists[self.homes[i]]=netx.dijkstra_path_length(self.graph, source=loc, target=self.homes[i])
             home_to_visit=min(home_dists, key=home_dists.get)
             homes_visited[index_dict[home_to_visit]]=True
