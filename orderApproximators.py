@@ -166,7 +166,9 @@ class OrderApproximator:
 
 
 
-    def get_drop_path_with_order(self, order):
+    def get_drop_path_with_order(self, order_orr):
+
+        order = order_orr.copy()
 
         curr_loc = self.start_loc
         result = [curr_loc]
@@ -206,7 +208,7 @@ class OrderApproximator:
         return self.get_path_dropoffs(result)
 
 
-    def steiner_aneal(self, iterations = 100, tree_func = get_dropoff_ordering_steiner, epsilon = 0):
+    def steiner_aneal(self, iterations = 500, tree_func = get_dropoff_ordering_steiner, epsilon = 0):
 
         curr_order = tree_func(self)
         curr_result = self.get_drop_path_with_order(curr_order)
@@ -222,6 +224,8 @@ class OrderApproximator:
             new_result = self.get_drop_path_with_order(new_order)
             new_cost = cost_of_solution(self.graph, new_result[0], new_result[1])
 
+            print(new_order)
+
             if new_cost < curr_min or random.random() < e_prob:
                 curr_order = new_order
                 curr_result = new_result
@@ -232,19 +236,16 @@ class OrderApproximator:
 
     def mutate_order(self, order):
 
-        arr = order.copy()
+        arr = copy.deepcopy(order)
+        print("After deep copy :", len(arr))
 
         if len(arr) <=1:
             return arr
-        elif len(arr) == 2:
-            return [arr[1], arr[0]]
         else:
-            index_1 = int(random.random()*len(arr))
-            index_2 = int(random.random()*len(arr))
-
-            temp = arr[index_2]
-            arr[index_2] = arr[index_1]
-            arr[index_1] = temp
+            pos1 = int(random.random()*len(arr))
+            pos2 = int(random.random()*len(arr))
+            arr[pos1], arr[pos2] = arr[pos2], arr[pos1]
+            print("In else block: ", len(arr))
             return arr
 
 
