@@ -203,12 +203,12 @@ class OrderApproximator:
         return self.get_path_dropoffs(result)
 
 
-    def steiner_aneal(self, iterations = 1000, tree_func = get_dropoff_ordering_steiner):
+    """def steiner_aneal(self, iterations = 1000, tree_func = get_dropoff_ordering_steiner):
 
         curr_order = steiner_
 
         curr_result =
 
 
-    def mst_aneal(self, iterations=1000, tree_func=get_dropoff_ordering_steiner):
+    def mst_aneal(self, iterations=1000, tree_func=get_dropoff_ordering_steiner):"""
 

@@ -172,7 +172,46 @@ class SearchAgent():
         # for p in pros:
         #     p.join()
 
-
+    def get_path_dropoffs(self, path):
+        traversal = [self.start_state.start]
+        dropoffs = dict()
+        loc = ''
+        closestHomes = dict()
+        homesVisted=dict()
+        for i in self.homes:
+            homesVisted[i]=False
+        currentHome = 0
+        for i in range(len(path)):
+            loc = path[i]
+            if loc == 'go_home':
+                break
+            if loc != 'drop':
+                currentHome = 0
+                closestHomes = dict()
+                traversal.append(loc)
+                for home in self.homes:
+                    if homesVisted[home]==False:
+                        closestHomes[home] = netx.dijkstra_path_length(self.graph, loc, home)
+            else:
+                sortedDict = sorted(closestHomes.items(), key=lambda x: x[1])
+                if currentHome == 0:
+                    dropoffs[traversal[len(traversal)-1]] = [sortedDict[currentHome][0]]
+                    homesVisted[sortedDict[currentHome][0]]=True
+                    currentHome += 1
+                else:
+                    home_to_choose = tuple()
+                    for i in range(currentHome + 1):
+                        home_to_choose = sortedDict[i]
+                    dropoffs[traversal[len(traversal)-1]] += [home_to_choose[0]]
+                    homesVisted[home_to_choose[0]]=True
+                    currentHome += 1
+        back_home = netx.shortest_path(self.graph, traversal[len(traversal) - 1], traversal[0])
+        for i in range(len(back_home)):
+            if i == 0:
+                continue
+            else:
+                traversal.append(back_home[i])
+        return [traversal, dropoffs]
 
     def uniformCostSearch(self):
         """Search the node of least total cost first."""
@@ -296,7 +335,7 @@ class SearchAgent():
             return dist
 
 
-    def astar(self, heuristic=steinerHeuristic):
+    def astar(self, heuristic=naiveHeuristic):
         """Search the node of least total cost first."""
         # path, weights = {}, {}
         closed = set()
@@ -324,41 +363,6 @@ class SearchAgent():
         print("Nodes expanded: ", len(closed))
         print("Path: ", goal[0].path)
         print("cost: ", goal[0].cost_so_far)
+        print(goal[0].path)
+        return self.get_path_dropoffs(goal[0].path)
 
-        return goal[0].path
-
-    def get_path_dropoffs(self,path):
-        traversal=[]
-        dropoffs=dict()
-        loc=''
-        closestHomes=dict()
-        currentHome=0
-        for i in range(len(path)):
-            loc=path[i]
-            if loc=='go_home':
-                break
-            if loc!='drop':
-                currentHome=0
-                closestHomes=dict()
-                traversal.append(loc)
-                for home in self.homes:
-                    closestHomes[home]=netx.dijkstra_path_length(self.graph,loc,home)
-            else:
-                sortedDict=sorted(closestHomes.items(), key=lambda x: x[1])
-                if currentHome==0:
-                    dropoffs[loc]=[sortedDict[currentHome]]
-                    currentHome+=1
-                else:
-                    home_to_choose=''
-                    possibleHomes=list(sortedDict.keys())
-                    for i in range(currentHome+1):
-                        home_to_choose=possibleHomes[i]
-                    dropoffs[loc]+=[sortedDict[home_to_choose]]
-                    currentHome+=1
-        back_home=netx.shortest_path(self.graph,traversal[len(traversal)-1],locs[0])
-        for i in range(len(back_home)):
-            if i==0:
-                continue
-            else:
-                traversal.append(back_home[i])
-        return traversal,dropoffs
