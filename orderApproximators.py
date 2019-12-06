@@ -255,7 +255,7 @@ class OrderApproximator:
         curr_min = cost_of_solution(self.graph, curr_result[0], curr_result[1])
         # print("initial cost ", curr_min)
 
-        for i in tqdm(range(iterations)):
+        for i in (range(iterations)):
 
             e_prob = epsilon / max(1, i / 10)
 
