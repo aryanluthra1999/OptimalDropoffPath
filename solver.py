@@ -7,6 +7,7 @@ import utils
 import search_agents as search
 import orderApproximators
 import SteinerApproxSolver
+import nearest_neighbors
 import networkx as netx
 import output_validator
 import time
@@ -52,7 +53,12 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
     order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
                                                               list_of_locations)
     result = order_approx_agent.get_drop_path()
-    #print(cost_of_solution(graph, result[0], result[1]))
+    print("Steiner MST approx", cost_of_solution(graph, result[0], result[1]))
+
+    nn_agent = nearest_neighbors.NearestNeighbors(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
+    result = nn_agent.get_dropoff_ordering_ns()
+
+    print("Nearest neighbour3 approx", cost_of_solution(graph, result[0], result[1]))
 
     """steiner_approx_solver = SteinerApproxSolver.SteinerApproxSolver(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
     brr=steiner_approx_solver.solveSteinerTreeDTH()
@@ -107,6 +113,7 @@ def solve_from_file(input_file, output_directory, params=[]):
     for i in range(len(old_keys)):
         new_dict[new_keys[i]] = convert_locations_to_indices(result[1][old_keys[i]],list_locations)
     compareSolution(input_file,result[2],result[0],new_dict,list_locations,output_directory)
+
     """basename, filename = os.path.split(input_file)
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
@@ -150,22 +157,22 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_director
         output_file = utils.input_to_output(fileName, output_directory)
         convertToFile(convert_locations_to_indices(path,list_locs), dropoff_mapping, output_file, list_locs)
 
-if __name__=="__main__":
-    parser = argparse.ArgumentParser(description='Parsing arguments')
-    parser.add_argument('--all', action='store_true', help='If specified, the solver is run on all files in the input directory. Else, it is run on just the given input file')
-    parser.add_argument('input', type=str, help='The path to the input file or directory')
-    parser.add_argument('output_directory', type=str, nargs='?', default='.', help='The path to the directory where the output should be written')
-    parser.add_argument('params', nargs=argparse.REMAINDER, help='Extra arguments passed in')
-    args = parser.parse_args()
-    output_directory = args.output_directory
-    if args.all:
-        input_directory = args.input
-        solve_all(input_directory, output_directory, params=args.params)
-    else:
-        input_file = args.input
-        solve_from_file(input_file, output_directory, params=args.params)
+# if __name__=="__main__":
+#     parser = argparse.ArgumentParser(description='Parsing arguments')
+#     parser.add_argument('--all', action='store_true', help='If specified, the solver is run on all files in the input directory. Else, it is run on just the given input file')
+#     parser.add_argument('input', type=str, help='The path to the input file or directory')
+#     parser.add_argument('output_directory', type=str, nargs='?', default='.', help='The path to the directory where the output should be written')
+#     parser.add_argument('params', nargs=argparse.REMAINDER, help='Extra arguments passed in')
+#     args = parser.parse_args()
+#     output_directory = args.output_directory
+#     if args.all:
+#         input_directory = args.input
+#         solve_all(input_directory, output_directory, params=args.params)
+#     else:
+#         input_file = args.input
+#         solve_from_file(input_file, output_directory, params=args.params)
 
 
-"""if __name__ == "__main__":
+if __name__ == "__main__":
     fname = "inputs/7_50.in"
-    runSolver(fname)"""
+    runSolver(fname)
