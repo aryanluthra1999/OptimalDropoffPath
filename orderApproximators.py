@@ -205,10 +205,11 @@ class OrderApproximator:
 
     def steiner_aneal(self, iterations = 1000, tree_func = get_dropoff_ordering_steiner):
 
-        curr_order = steiner_
-
-        curr_result =
+        curr_order = tree_func(self)
 
 
-    def mst_aneal(self, iterations=1000, tree_func=get_dropoff_ordering_steiner):
+    def mutate_order(self, arr):
 
+
+
+    def mst_aneal(self, iterations=1000, tree_func=get_dropoff_ordering_mst):
