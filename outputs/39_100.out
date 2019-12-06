@@ -1,16 +1,17 @@
-SantaClarita Carrollton Durham Concord Victorville Thornton NewportNews Beaumont Thornton Huntsville Shreveport Victorville GardenGrove FortCollins Austin Indianapolis Stockton Pomona Allentown Omaha Ontario Boston Hartford LouisvilleJefferson WestValleyCity Surprise Sunnyvale Visalia Portland Washington RanchoCucamonga Brownsville Orlando LosAngeles OklahomaCity StPetersburg Newark Alexandria Bellevue Scottsdale SiouxFalls Independence Fayetteville Fontana Worcester Fontana Bellevue Wichita LexingtonFa Frisco Waco SanDiego Stamford FortCollins SantaClarita
-43
+SantaClarita Carrollton GardenGrove Victorville Shreveport Huntsville Thornton Beaumont Thornton Victorville Concord Reno PembrokePines Austin Indianapolis Stockton Pomona Allentown Omaha Ontario Boston Hartford LouisvilleJefferson WestValleyCity Surprise Sunnyvale Visalia Portland Washington RanchoCucamonga Brownsville Orlando LosAngeles OklahomaCity StPetersburg Newark Lafayette Alexandria Bellevue Scottsdale SiouxFalls Independence Fayetteville Fontana Worcester Alexandria Bellevue Wichita LexingtonFa SanDiego Stamford FortCollins SantaClarita
+44
 Carrollton Carrollton
-Concord Concord
-Victorville Victorville
-NewportNews NewportNews
-Beaumont Beaumont
-Thornton Midland Yonkers
-Huntsville Huntsville
-Shreveport Shreveport
 GardenGrove GardenGrove
+Victorville Victorville
+Shreveport Shreveport
+Huntsville Huntsville
+Thornton Yonkers Midland
+Beaumont NewportNews Beaumont
+Concord Concord
+PembrokePines PembrokePines
 Austin Austin
-Indianapolis PembrokePines Indianapolis Stockton
+Indianapolis Indianapolis
+Stockton Stockton
 Pomona Pomona
 Allentown Allentown
 Omaha Omaha
@@ -28,9 +29,10 @@ RanchoCucamonga RanchoCucamonga
 Brownsville Brownsville
 Orlando Orlando
 LosAngeles LosAngeles
-OklahomaCity Lafayette OklahomaCity
+OklahomaCity OklahomaCity
 StPetersburg StPetersburg
 Newark Newark
+Lafayette Lafayette
 Alexandria Alexandria
 Bellevue Bellevue
 Scottsdale Scottsdale
@@ -40,6 +42,5 @@ Fayetteville Fayetteville
 Worcester Garland Worcester
 Wichita Wichita
 LexingtonFa LexingtonFa
-Waco Waco
-SanDiego Paterson StLouis
+SanDiego Paterson Waco StLouis
 Stamford Stamford
