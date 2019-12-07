@@ -364,5 +364,7 @@ class SearchAgent():
         print("Path: ", goal[0].path)
         print("cost: ", goal[0].cost_so_far)
         print(goal[0].path)
+
+        result = [goal[0].start] + goal[0].path.copy()
         return self.get_path_dropoffs(goal[0].path)
 
