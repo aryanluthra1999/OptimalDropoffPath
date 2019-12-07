@@ -132,9 +132,9 @@ def solve_all(input_directory, output_directory, params=[]):
     print("Started with the inputs: ")
     pool = multiprocessing.Pool()
     param_list = []
-    for input_file in tqdm(input_files):
-        if input_file[input_file.index('_'):input_file.index('_') + 3] == '_50':
-            param_list.append([input_file, output_directory, params])
+    # for input_file in tqdm(input_files):
+    #     if input_file[input_file.index('_'):input_file.index('_') + 3] == '_50':
+    #         param_list.append([input_file, output_directory, params])
 
     for input_file in tqdm(input_files):
         if input_file[input_file.index('_'):input_file.index('_')+4]=='_100':
