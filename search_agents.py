@@ -360,11 +360,13 @@ class SearchAgent():
                         #print(heuristic(self,next_state[0]))
                         fringe.push(next_state, next_state[0].cost_so_far + heuristic(self, next_state[0]))
 
-        result = [goal[0].start] + goal[0].path.copy()
+        result =  goal[0].path.copy()
+        if result[0] == "drop":
+            result = [goal[0].start] + result
 
         print("Nodes expanded: ", len(closed))
         print("Path: ", result)
         print("cost: ", goal[0].cost_so_far)
 
-        return result
+        return self.get_path_dropoffs(result)
 
