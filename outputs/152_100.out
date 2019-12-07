@@ -1,18 +1,19 @@
-SaintPaul SanJose SanDiego Minneapolis BatonRouge Albuquerque Baltimore ChulaVista Cincinnati Phoenix Durham SantaAna Durham Phoenix Charlotte ChulaVista Baltimore Albuquerque FortWayne Albuquerque Baltimore LongBeach Dallas Scottsdale Honolulu Lubbock StPetersburg Milwaukee Columbus Glendale Hialeah Glendale Columbus Milwaukee Stockton Milwaukee StPetersburg Cincinnati ChulaVista JerseyCity Denver Detroit Tucson Dallas Greensboro Chandler Plano LosAngeles Austin Aurora Omaha Miami KansasCity Fresno Lexington JerseyCity Toledo Tampa SanDiego SanJose SaintPaul
-35
-SanJose Madison SanJose
+SaintPaul SanJose SanDiego Minneapolis Lincoln SantaAna Durham Phoenix Cincinnati ChulaVista Baltimore Albuquerque FortWayne Albuquerque Baltimore LongBeach FortWorth Louisville Memphis Honolulu Lubbock StPetersburg Milwaukee Columbus Glendale Hialeah Glendale Columbus Milwaukee Stockton Milwaukee StPetersburg Cincinnati ChulaVista Charlotte Irvine Denver Detroit Tucson Dallas Greensboro Chandler Plano LosAngeles Austin Aurora Omaha Miami KansasCity Fresno Lexington JerseyCity Toledo Tampa Portland Garland SaintPaul
+37
+SanJose SanJose
+SanDiego SanDiego
 Minneapolis Bakersfield
-BatonRouge FortWorth
-Phoenix Phoenix
-SantaAna Pittsburgh SantaAna
+Lincoln Lincoln
+SantaAna SantaAna Pittsburgh
 Durham WinstonSalem Durham
-Charlotte Charlotte
-FortWayne Anchorage FortWayne
+Phoenix Phoenix
 Baltimore Indianapolis Baltimore
-LongBeach LongBeach
-Dallas Dallas
-Scottsdale Scottsdale Newark
-Honolulu Honolulu Memphis
+FortWayne FortWayne Anchorage
+LongBeach LongBeach Dallas
+FortWorth FortWorth
+Louisville Madison
+Memphis Memphis
+Honolulu Honolulu Scottsdale
 Lubbock Lubbock
 StPetersburg StPetersburg Henderson
 Milwaukee Milwaukee
@@ -21,7 +22,7 @@ Glendale Glendale
 Hialeah OklahomaCity Hialeah
 Stockton Houston Stockton
 Cincinnati Cincinnati
-JerseyCity JerseyCity Laredo Lincoln
+Charlotte Charlotte
 Denver Denver
 Tucson Raleigh Tucson
 Chandler Chandler
@@ -32,6 +33,7 @@ Aurora Aurora
 KansasCity NewOrleans
 Fresno Chesapeake Spokane
 Lexington Lexington
+JerseyCity Laredo JerseyCity
 Toledo Atlanta
 Tampa Tampa
-SanDiego SanDiego
+Garland Newark

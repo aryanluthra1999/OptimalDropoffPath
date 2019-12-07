@@ -1,10 +1,10 @@
-FortCollins Akron FortSmith Arvada Fargo Charleston Fargo FortWaltonBeach Amarillo Hickory Inglewood Lubbock Louisville Leominster Manchester Bakersfield Elkhart Bremerton Allentown Detroit Lacey Brighton Irving Lacey Corona Allentown Henderson BoiseCity BelAir LittleRock Greensboro Abilene Champaign Harrisburg Irvine LasVegas Kennewick LasVegas Layton Bloomington DesMoines GreenBay ColoradoSprings Layton Evansville FortWayne Fairfield Joliet Fairfield Lancaster Lorain Clarksville Jefferson Burbank Indianapolis Garland Albany Aberdeen Barnstable Brownsville Fayetteville Gilbert Jacksonville Beaumont Houston Fresno DalyCity Durham Boise CollegeStation GardenGrove Carrollton Berkeley Frederick Hampton Lafayette Hampton Bellevue Independence Arlington Harlingen FortCollins
-64
-FortCollins Hemet Hollywood FortCollins
+FortCollins Akron FortSmith Arvada Fargo Charleston Fargo FortWaltonBeach Amarillo Hickory Inglewood Lubbock Louisville Leominster Manchester Bakersfield Elkhart Bremerton Allentown AppleValley Corona Detroit Lacey Brighton Irving HuntingtonBeach Henderson BoiseCity BelAir LittleRock Greensboro Abilene Champaign Harrisburg Irvine Anaheim Kennewick LasVegas Layton Bloomington DesMoines GreenBay ColoradoSprings Layton Evansville FortWayne Fairfield Joliet Fairfield Lancaster Lorain Clarksville Jefferson Burbank Indianapolis Garland Albany Aberdeen Barnstable Brownsville Fayetteville Gilbert Jacksonville Beaumont Houston Downey Carrollton Laredo CollegeStation Canton FortWorth Fullerton Frederick Hampton Lafayette Hampton Bellevue Independence Knoxville FortCollins
+63
+FortCollins Hollywood FortCollins
 Akron Elizabeth Akron
 Arvada Erie Albuquerque Arvada
-Charleston BonitaSprings Baltimore
 Fargo Fargo
+Charleston BonitaSprings Baltimore
 FortWaltonBeach FortWaltonBeach
 Amarillo Alexandria Amarillo
 Hickory Hickory
@@ -15,22 +15,23 @@ Leominster Leominster
 Manchester Atlanta Manchester
 Bakersfield AnnArbor Bakersfield
 Elkhart Elkhart
-Bremerton Grayslake Bremerton
+Bremerton Bremerton
 Allentown Allentown
+AppleValley AppleValley
 Detroit Detroit
 Lacey Lacey
 Brighton Fremont Brighton
 Irving Cary Irving
-Corona AppleValley
-Henderson Henderson
+Henderson Grayslake Henderson
 BoiseCity Eugene BoiseCity
 LittleRock LittleRock
 Abilene Abilene
 Champaign Champaign
 Harrisburg Fontana Harrisburg
 Irvine Irvine
-LasVegas Lakeland Cleveland Austin
-Kennewick Anaheim Kennewick
+Anaheim Harlingen Anaheim
+Kennewick Kennewick
+LasVegas Cleveland Austin
 Layton Layton Denver
 DesMoines Chandler DesMoines
 ColoradoSprings ColoradoSprings
@@ -49,18 +50,16 @@ Barnstable Barnstable
 Brownsville Brownsville
 Fayetteville Appleton Fayetteville
 Gilbert Augusta Gilbert
-Jacksonville Jacksonville
+Jacksonville Kalamazoo Jacksonville
 Beaumont Bethlehem Beaumont
-Houston Houston
-Fresno Kalamazoo Fresno
-DalyCity DalyCity
-Boise Boise
-CollegeStation ElPaso CollegeStation
+Houston Houston DalyCity Fresno
 Carrollton Carrollton
-Berkeley ElMonte DavidsonCounty CapeCoral Berkeley
+CollegeStation Boise ElPaso CollegeStation
+Canton DavidsonCounty
+FortWorth ElMonte CapeCoral Berkeley
 Frederick Frederick
 Hampton Hampton
 Lafayette Lakewood Lafayette
-Bellevue Bellevue
+Bellevue Lakeland Bellevue
 Independence Independence
-Harlingen Knoxville Harlingen
+Knoxville Hemet Knoxville
