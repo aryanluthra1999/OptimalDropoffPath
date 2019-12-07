@@ -45,14 +45,14 @@ def solve(list_of_locations, list_of_homes, starting_car_location, adjacency_mat
 
     list_of_locations=[str(i) for i in list_of_locations]
 
-    # searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location,list_of_locations)
-    #
-    # result = searchAgent.astar()
+    searchAgent = search.SearchAgent(adjacency_matrix,list_of_homes,starting_car_location,list_of_locations)
+
+    result = searchAgent.astar()
 
 
-    order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
-                                                              list_of_locations)
-    result = order_approx_agent.steiner_aneal()
+    # order_approx_agent = orderApproximators.OrderApproximator(adjacency_matrix, list_of_homes, starting_car_location,
+    #                                                           list_of_locations)
+    # result = order_approx_agent.steiner_aneal()
     # print("Steiner MST approx", cost_of_solution(graph, result[0], result[1]))
 
     # nn_agent = nearest_neighbors.NearestNeighbors(adjacency_matrix, list_of_homes, starting_car_location, list_of_locations)
@@ -72,6 +72,12 @@ def runSolver(inputFile):
     params=[]
     num_of_locations, num_houses, list_locations, list_houses, starting_car_location, adjacency_matrix = data_parser(input_data)
     result=solve(list_locations, list_houses, starting_car_location, adjacency_matrix, params=params)
+    new_keys = convert_locations_to_indices(result[1].keys(), list_locations)
+    new_dict = dict()
+    old_keys = list(result[1].keys())
+    for i in range(len(old_keys)):
+        new_dict[new_keys[i]] = convert_locations_to_indices(result[1][old_keys[i]], list_locations)
+    compareSolution(inputFile, result[2], result[0], new_dict, list_locations, 'outputs')
 
 """
 ======================================================================
@@ -184,7 +190,7 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_director
         output_file = utils.input_to_output(fileName, output_directory)
         convertToFile(convert_locations_to_indices(path,list_locs), dropoff_mapping, output_file, list_locs)
 
-if __name__=="__main__":
+"""if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Parsing arguments')
     parser.add_argument('--all', action='store_true', help='If specified, the solver is run on all files in the input directory. Else, it is run on just the given input file')
     parser.add_argument('input', type=str, help='The path to the input file or directory')
@@ -197,8 +203,8 @@ if __name__=="__main__":
         solve_all(input_directory, output_directory, params=args.params)
     else:
         input_file = args.input
-        solve_from_file(input_file, output_directory, params=args.params)
+        solve_from_file(input_file, output_directory, params=args.params)"""
 
-# if __name__ == "__main__":
-#     fname = "inputs/25_200.in"
-#     runSolver(fname)
+if __name__ == "__main__":
+    fname = "inputs/67_50.in"
+    runSolver(fname)
