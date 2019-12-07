@@ -255,7 +255,7 @@ class OrderApproximator:
         return self.get_path_dropoffs(result)
 
 
-    def steiner_aneal(self, iterations = 100000, tree_func = get_dropoff_ordering_steiner, epsilon = 0):
+    def steiner_aneal(self, iterations = 270000, tree_func = get_dropoff_ordering_steiner, epsilon = .05):
 
         curr_order = tree_func(self)
         curr_result = self.get_drop_path_with_order(curr_order)
@@ -267,7 +267,7 @@ class OrderApproximator:
         while i <= (iterations):
             #print(i)
 
-            e_prob = epsilon/max(1, i/10)
+            e_prob = epsilon
 
 
             new_order = self.mutate_order(curr_order)

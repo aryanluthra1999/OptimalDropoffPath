@@ -1,17 +1,19 @@
-zero one two three ten eleven ten seventeen sixteen fifteen twentyone twenty twentyseven twentysix twentyfive twentysix thirtythree thirtyfour thirtyfive twentynine thirty thirtyseven fortyfour fortythree fortyfour fortyfive fiftytwo fiftythree sixty fiftynine fiftyeight fiftyseven sixtyfour sixtyfive sixtysix sixtyseven sixtyeight sixtynine seventy sixtyfour seventyone seventyseven eightyfour seventyeight seventynine eighty eightyseven eightysix eightyfive ninetyone ninetyeight ninetytwo ninetynine onehun onehunone onehuneight onehunnine onehunten onehunseventeen onehuneighteen onehunnineteen onehuntwentysix onehuntwentyfive onehuntwentyfour onehuntwentythree onehuntwentytwo onehuntwentyone onehuntwentyeight onehunthirtyfive onehunthirtyfour onehunforty onehunthirtynine onehunfortysix onehunfortyfive onehunfortyfour onehunfortythree onehunfifty onehunfortynine onehunfortyeight onehunfiftyfour onehunsixtyone onehunsixty onehunfiftynine onehunsixtysix onehunsixtyfive onehunsixtyfour onehunsixtythree onehunseventy onehunsixtynine onehunseventyfive onehuneightytwo onehuneightyone onehuneighty onehuneightyseven onehuneightysix onehuneightyfive onehuneightyfour onehunninetyone onehunninetytwo onehunninetythree onehunninetyfour onehuneightyseven onehuneighty onehunseventythree onehunsixtysix onehunfiftynine onehunfiftytwo onehunfortyfive onehunthirtyeight onehunthirtyone onehuntwentyfour onehunseventeen onehunten onehunthree ninetysix eightynine eightytwo seventyfive seventysix seventyseven seventy sixtythree fiftysix fortynine fortytwo thirtyfive twentyeight twentyone fourteen seven six zero
-82
-one one
-two two
+zero three two one seven fourteen thirteen twelve eleven ten seventeen sixteen fifteen sixteen twentythree twentyfour twentyfive twentysix thirtythree thirtyfour thirtyfive twentynine thirty thirtyseven fortyfour fortythree fortyfour fortyfive fiftytwo fiftythree sixty fiftynine fiftyeight fiftynine sixtysix sixtyseven sixtyeight sixtynine seventy sixtyfour seventyone seventyseven eightyfour seventyeight seventynine eighty eightyseven eightysix eightyfive ninetyone ninetyeight ninetytwo ninetynine onehun onehunone onehuneight onehunnine onehunten onehuneleven onehuneighteen onehunseventeen onehunsixteen onehuntwentythree onehuntwentyfour onehuntwentyfive onehuntwentysix onehuntwenty onehuntwentyseven onehuntwentyeight onehunthirtyfive onehunthirtyfour onehunforty onehunthirtynine onehunfortysix onehunfortyfive onehunfortyfour onehunfortythree onehunfifty onehunfortynine onehunfortyeight onehunfiftyfour onehunsixtyone onehunsixty onehunfiftynine onehunsixtysix onehunsixtyfive onehunsixtyfour onehunsixtyfive onehunsixtysix onehunseventythree onehunseventyfour onehunseventyfive onehunsixtynine onehunseventy onehunseventyone onehunseventyeight onehunseventyseven onehunseventysix onehuneightytwo onehuneightyone onehuneighty onehuneightyseven onehunninetyfour onehunninetythree onehunninetytwo onehunninetyone onehuneightyfour onehunseventyseven onehunseventy onehunsixtythree onehunfiftysix onehunfortynine onehunfortytwo onehunthirtyfive onehuntwentyeight onehuntwentyone onehuntwenty onehunthirteen onehunnineteen onehuneighteen onehuneleven onehunfour ninetyseven ninety eightythree seventysix sixtynine sixtytwo fiftyfive fortyeight fortyone thirtyfour twentyseven twenty thirteen six zero
+87
 three three
+two two
+one one
+seven seven
+fourteen fourteen
+twelve twelve
+eleven eleven
 ten ten
-eleven twelve eleven
 seventeen seventeen
 sixteen sixteen
-fifteen fifteen
-twenty twenty
-twentyseven twentyseven
-twentysix twentysix
-twentyfive twentythree twentyfive
+fifteen twenty fifteen
+twentythree twentythree
+twentyfive twentyfive
+twentysix twentyseven twentysix
 thirtythree thirtythree
 thirtyfour thirtyfour
 twentynine twentynine
@@ -22,16 +24,15 @@ fortyfive fortyfive
 fiftytwo fiftytwo
 fiftythree fiftyfive fiftythree
 sixty sixty
-fiftyeight fiftyeight
-fiftyseven fiftyseven
-sixtyfour sixtyfour
+fiftyeight fiftyseven fiftyeight
 sixtysix sixtysix
 sixtyseven sixtyseven
 sixtynine sixtynine
 seventy seventy
+sixtyfour sixtyfour
 seventyone seventytwo seventyone
-seventyseven seventyseven
-eightyfour eightythree eightyfour
+seventyseven seventyfive seventyseven
+eightyfour eightyfour
 seventyeight seventyeight
 seventynine seventynine
 eightyseven eightyseven
@@ -39,15 +40,16 @@ ninetyeight ninetyeight
 ninetynine ninetynine
 onehunone onehunone
 onehuneight onehuneight
-onehunten onehuneleven onehunten
-onehunseventeen onehunsixteen onehunseventeen
+onehunten onehunten
+onehuneleven onehuneleven
 onehuneighteen onehuneighteen
-onehunnineteen onehunthirteen onehunnineteen
-onehuntwentysix onehuntwentysix
-onehuntwentyfour onehuntwentyfour
+onehunseventeen onehunseventeen
+onehunsixteen onehunsixteen
 onehuntwentythree onehuntwentythree
-onehuntwentyone onehuntwentyone
-onehuntwentyeight onehunthirty onehuntwentyseven onehuntwentyeight
+onehuntwentyfour onehuntwentyfour
+onehuntwentysix onehuntwentysix
+onehuntwentyseven onehuntwentyseven
+onehuntwentyeight onehuntwentyeight onehunthirty
 onehunthirtyfive onehunthirtyfive
 onehunforty onehunforty
 onehunfortysix onehunfortysix
@@ -59,26 +61,29 @@ onehunfortynine onehunfortynine
 onehunfiftyfour onehunfiftyfour
 onehunsixtyone onehunsixtyone
 onehunsixty onehunsixty
-onehunfiftynine onehunfiftyseven onehunfiftynine
+onehunfiftynine onehunfiftynine onehunfiftyseven
 onehunsixtysix onehunsixtysix
 onehunsixtyfive onehunsixtyfive
-onehunsixtyfour onehunsixtyfour
-onehunsixtythree onehunsixtythree
-onehunseventy onehunseventyone onehunseventy
-onehunsixtynine onehunsixtynine
-onehunseventyfive onehunseventyfour onehunseventyfive
-onehuneightytwo onehunseventysix onehuneightytwo
-onehuneightyone onehuneightyone
-onehuneighty onehunseventyeight onehuneighty
-onehuneightyseven onehuneightyseven
-onehuneightyfour onehuneightyfour
-onehunninetyone onehunninety onehunninetyone
-onehunninetytwo onehunninetytwo
-onehunninetythree onehunninetythree
-onehunninetyfour onehunninetyfour
+onehunsixtyfour onehunsixtythree onehunsixtyfour
 onehunseventythree onehunseventythree
-eightytwo eightytwo
-seventyfive seventyfive
-fourteen fourteen
-seven seven
+onehunseventyfour onehunseventyfour
+onehunseventyfive onehunseventyfive
+onehunsixtynine onehunsixtynine
+onehunseventy onehunseventy
+onehunseventyone onehunseventyone
+onehunseventyeight onehunseventyeight
+onehunseventysix onehunseventysix
+onehuneightytwo onehuneightytwo
+onehuneightyone onehuneightyone
+onehuneighty onehuneighty
+onehuneightyseven onehuneightyseven
+onehunninetyfour onehunninetyfour
+onehunninetythree onehunninetythree
+onehunninetytwo onehunninetytwo
+onehunninetyone onehunninetyone onehunninety
+onehuneightyfour onehuneightyfour
+onehuntwentyone onehuntwentyone
+onehunthirteen onehunthirteen
+onehunnineteen onehunnineteen
+eightythree eightytwo eightythree
 six six
