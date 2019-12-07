@@ -206,5 +206,5 @@ def compareSolution(fileName,sol,path,dropoff_mapping,list_locs, output_director
         solve_from_file(input_file, output_directory, params=args.params)"""
 
 if __name__ == "__main__":
-    fname = "inputs/34_50.in"
+    fname = "inputs/67_50.in"
     runSolver(fname)
